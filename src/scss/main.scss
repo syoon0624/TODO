@@ -1,0 +1,10 @@
+@import 'utils.scss';
+
+// 메인 화면, 전체 스타일
+
+* {
+  font-family: 'OTWelcomeBA';
+  :focus {
+    outline: 0;
+  }
+}
