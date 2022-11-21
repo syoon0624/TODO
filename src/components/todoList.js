@@ -7,14 +7,14 @@ export default (element = undefined, data = []) => {
         .map((item) => {
           return `
         <li id=${item.id} class="todo-li" draggable="true">
-          <div class="title-wrap">
+          <div class="title-wrap ${item.done ? 'done' : ''}">
             <p class="title">${item.title}</p>
           </div>
           <div class="tool-wrap">
             <div class="done-wrap">
               ${
                 item.done
-                  ? `<button class="done-button done">취소하기</button>`
+                  ? `<button class="done-button">취소하기</button>`
                   : `<button class="done-button">완료하기</button>`
               }
             </div>

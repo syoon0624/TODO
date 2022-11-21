@@ -14,11 +14,23 @@ main {
   border: 2px solid red;
 }
 
+.list-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 form {
   border: 2px solid yellow;
 }
 
 .todo-li {
+  color: black;
+  .done {
+    color: red;
+  }
+  p {
+    padding-right: 10px;
+  }
   border: 1px solid black;
   cursor: move;
   padding: 30px;
@@ -33,4 +45,12 @@ form {
 .dragging {
   opacity: 0.3;
   border: 2px solid blue;
+}
+
+.done-list-wrapper {
+  border: 2px solid yellow;
+}
+
+.not-done-list-wrapper {
+  border: 2px solid green;
 }

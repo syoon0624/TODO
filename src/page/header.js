@@ -1,4 +1,4 @@
-import { getList, createTodo } from '../utils';
+import { getList, createTodo, state } from '../utils';
 import { todoForm, todoList } from '../components';
 import { syncState, todoListTool } from '../features';
 
@@ -21,7 +21,8 @@ export default async () => {
     // Post 후 재 렌더링
     const list = await getList();
     syncState(list);
-    todoList('.list-wrap', list);
+    todoList('.done-list-wrapper', state.doneList);
+    todoList('.not-done-list-wrapper', state.notDoneList);
     const editList = document.querySelectorAll('.todo-li');
     todoListTool(editList);
   });

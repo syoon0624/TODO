@@ -2,6 +2,11 @@ import { editTodo, deleteTodo } from '../utils';
 
 // 각 list 마다 글 수정하기, 완료하기, 삭제하기 버튼 활성화
 export default (list) => {
+  const doneListWrapperEl = document.querySelector('.done-list-wrapper > ul');
+  const notDoneListWrapperEl = document.querySelector(
+    '.not-done-list-wrapper > ul'
+  );
+
   list.forEach((ele) => {
     const toolEl = ele.lastElementChild;
     const titleEl = document.querySelector(`#${ele.id} > div > p`);
@@ -12,14 +17,23 @@ export default (list) => {
         // 완료하기 버튼
         case 'done-wrap':
           const buttonEl = e.firstElementChild;
+          const titleWrapEl = document.querySelector(
+            `#${ele.id} > .title-wrap`
+          );
           buttonEl.addEventListener('click', () => {
             if (buttonEl.textContent === '완료하기') {
               buttonEl.textContent = '취소하기';
-              buttonEl.classList.remove('done');
+              titleWrapEl.classList.add('done');
+              doneListWrapperEl.insertBefore(ele, doneListWrapperEl.firstChild);
               editTodo(ele.id, title, true);
             } else {
               buttonEl.textContent = '완료하기';
-              buttonEl.classList.add('done');
+              titleWrapEl.classList.remove('done');
+              console.log(titleWrapEl);
+              notDoneListWrapperEl.insertBefore(
+                ele,
+                notDoneListWrapperEl.firstChild
+              );
               editTodo(ele.id, title, false);
             }
           });
