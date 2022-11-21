@@ -1,11 +1,28 @@
 import { editTodo, deleteTodo, getList } from '../utils';
 import { todoList } from '../components';
 
-export const editTodoList = (list) => {
+export const todoListTool = (list) => {
   list.forEach((ele) => {
-    // 각 list 마다 글 수정하기, 삭제하기 버튼 활성화
+    // 각 list 마다 글 수정하기, 완료하기, 삭제하기 버튼 활성화
     [...ele.children].forEach((e) => {
       switch (e.className) {
+        // 완료하기 버튼
+        case 'done-wrap':
+          const buttonEl = e.firstElementChild;
+          buttonEl.addEventListener('click', () => {
+            const titleEl = document.querySelector(`#${ele.id} > p`);
+            if (buttonEl.textContent === '완료하기') {
+              buttonEl.textContent = '취소하기';
+              buttonEl.classList.remove('done');
+              editTodo(ele.id, titleEl.textContent, true);
+            } else {
+              buttonEl.textContent = '완료하기';
+              buttonEl.classList.add('done');
+              editTodo(ele.id, titleEl.textContent, false);
+            }
+          });
+          break;
+
         // 수정하기 버튼
         case 'edit-button':
           e.addEventListener('click', () => {
@@ -37,6 +54,7 @@ export const editTodoList = (list) => {
             }
           });
           break;
+
         // 삭제하기 버튼
         case 'delete-item':
           e.addEventListener('click', () => {
@@ -67,9 +85,9 @@ export default async () => {
   const data = await getList();
   todoList('.list-wrap', data);
 
-  // To-do list에서 TODO 글 수정하기
+  // To-do list에서 TODO 기능 사용하기
   const list = document.querySelectorAll('.todo-li');
-  editTodoList(list);
+  todoListTool(list);
 
   return;
 };

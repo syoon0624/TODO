@@ -20,6 +20,7 @@ export default async (id, title, done, order = 0) => {
         }
       );
       const json = await res.json();
+      console.log(json);
       return json;
     } else return;
   } catch (err) {

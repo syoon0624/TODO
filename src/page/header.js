@@ -1,6 +1,6 @@
 import { getList, createTodo } from '../utils';
 import { todoForm, todoList } from '../components';
-import { editTodoList } from './main';
+import { todoListTool } from './main';
 
 export default async () => {
   const headerEl = document.querySelector('header');
@@ -22,6 +22,6 @@ export default async () => {
     const list = await getList();
     todoList('.list-wrap', list);
     const editList = document.querySelectorAll('.todo-li');
-    editTodoList(editList);
+    todoListTool(editList);
   });
 };
