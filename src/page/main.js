@@ -5,9 +5,10 @@ import { swapList, syncState, todoListTool } from '../features';
 export default async () => {
   const mainEl = document.querySelector('main');
   mainEl.innerHTML += `
-    This is main
     <div class="list-wrap">
-      <div class="not-done-list-wrapper">done</div>
+      <p>미완료 TODO</p>
+      <div class="not-done-list-wrapper"></div>
+      <p>완료 TODO</p>
       <div class="done-list-wrapper">not-done</div>
     </div>
   `;

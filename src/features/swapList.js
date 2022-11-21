@@ -49,7 +49,6 @@ export default (ul, list) => {
         // 중복 방지(무분별한 API 호출 방지)
         if (buttonEl.textContent === '취소하기') {
           buttonEl.textContent = '완료하기';
-          console.log(titleWrapEl);
           titleWrapEl.classList.remove('done');
           notDoneListWrapperEl.insertBefore(
             ele,
