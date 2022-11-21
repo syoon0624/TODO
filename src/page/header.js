@@ -1,6 +1,6 @@
 import { getList, createTodo } from '../utils';
 import { todoForm, todoList } from '../components';
-import { todoListTool } from './main';
+import { syncState, todoListTool } from '../features';
 
 export default async () => {
   const headerEl = document.querySelector('header');
@@ -20,6 +20,7 @@ export default async () => {
 
     // Post 후 재 렌더링
     const list = await getList();
+    syncState(list);
     todoList('.list-wrap', list);
     const editList = document.querySelectorAll('.todo-li');
     todoListTool(editList);
