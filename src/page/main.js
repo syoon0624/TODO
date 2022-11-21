@@ -12,11 +12,6 @@ export default async () => {
     </div>
   `;
 
-  const doneListWrapperEl = document.querySelector('.done-list-wrapper');
-  const notDoneListWrapperEl = document.querySelector('.not-done-list-wrapper');
-  console.log(doneListWrapperEl);
-  console.log(notDoneListWrapperEl);
-
   // TO-DO list 불러오기 및 렌더링
   const data = await getList();
   syncState(data);

@@ -1,3 +1,4 @@
+import { editTodo } from '../utils';
 import reorderList from './reorderList';
 
 const getDragAfterElement = (ul, y) => {
@@ -18,12 +19,45 @@ const getDragAfterElement = (ul, y) => {
 };
 
 export default (ul, list) => {
+  const doneListWrapperEl = document.querySelector('.done-list-wrapper');
+  const notDoneListWrapperEl = document.querySelector('.not-done-list-wrapper');
+
   list.forEach((ele) => {
     ele.addEventListener('dragstart', () => {
       ele.classList.add('dragging');
     });
 
-    ele.addEventListener('dragend', () => {
+    ele.addEventListener('dragend', (e) => {
+      const title = ele.firstElementChild.firstElementChild.textContent;
+
+      const buttonEl = ele.lastElementChild.firstElementChild.firstElementChild;
+      const titleWrapEl = ele.firstElementChild;
+
+      // 완료 영역으로 드롭 시 상태 변화
+      if (doneListWrapperEl.contains(ele)) {
+        // 중복 방지(무분별한 API 호출 방지)
+        if (buttonEl.textContent === '완료하기') {
+          buttonEl.textContent = '취소하기';
+          titleWrapEl.classList.add('done');
+          doneListWrapperEl.insertBefore(ele, doneListWrapperEl.firstChild);
+          editTodo(ele.id, title, true);
+        }
+      }
+
+      // 미완료 영역으로 드롭 시 상태 변화
+      if (notDoneListWrapperEl.contains(ele)) {
+        // 중복 방지(무분별한 API 호출 방지)
+        if (buttonEl.textContent === '취소하기') {
+          buttonEl.textContent = '완료하기';
+          console.log(titleWrapEl);
+          titleWrapEl.classList.remove('done');
+          notDoneListWrapperEl.insertBefore(
+            ele,
+            notDoneListWrapperEl.firstChild
+          );
+          editTodo(ele.id, title, false);
+        }
+      }
       ele.classList.remove('dragging');
     });
   });

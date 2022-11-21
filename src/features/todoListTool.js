@@ -6,10 +6,10 @@ export default (list) => {
   const notDoneListWrapperEl = document.querySelector(
     '.not-done-list-wrapper > ul'
   );
-
   list.forEach((ele) => {
     const toolEl = ele.lastElementChild;
-    const titleEl = document.querySelector(`#${ele.id} > div > p`);
+    const titleEl = document.getElementById(ele.id).firstElementChild
+      .firstElementChild;
     let title = titleEl.textContent;
 
     [...toolEl.children].forEach((e) => {
@@ -17,9 +17,7 @@ export default (list) => {
         // 완료하기 버튼
         case 'done-wrap':
           const buttonEl = e.firstElementChild;
-          const titleWrapEl = document.querySelector(
-            `#${ele.id} > .title-wrap`
-          );
+          const titleWrapEl = document.getElementById(ele.id).firstElementChild;
           buttonEl.addEventListener('click', () => {
             if (buttonEl.textContent === '완료하기') {
               buttonEl.textContent = '취소하기';
@@ -29,7 +27,6 @@ export default (list) => {
             } else {
               buttonEl.textContent = '완료하기';
               titleWrapEl.classList.remove('done');
-              console.log(titleWrapEl);
               notDoneListWrapperEl.insertBefore(
                 ele,
                 notDoneListWrapperEl.firstChild
