@@ -1,11 +1,23 @@
 import { getList, createTodo, state } from '../utils';
-import { todoForm, todoList } from '../components';
+import { todoForm, todoList, nav } from '.';
 import { syncState, todoListTool } from '../features';
 
 export default async () => {
   const headerEl = document.querySelector('header');
+  headerEl.innerHTML += `
+  <div class="head-wraper">
+    <div class="logo-wrapper">
+      <p>TO-DO App</p>
+    </div>
+    <div class="form-wrapper">
+    </div>
+    <div class="nav-bar-wrapper">
+    </div>
+  </div>
+  `;
 
-  todoForm('header', 'form-wrapper');
+  todoForm('.form-wrapper');
+  nav('.nav-bar-wrapper');
 
   const formEl = document.querySelector('.todo-form');
   const inputEl = document.querySelector('input');
