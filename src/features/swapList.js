@@ -34,7 +34,7 @@ export default (ul, list) => {
       const titleWrapEl = ele.firstElementChild;
 
       // 완료 영역으로 드롭 시 상태 변화
-      if (doneListWrapperEl.contains(ele)) {
+      if (doneListWrapperEl && doneListWrapperEl.contains(ele)) {
         // 중복 방지(무분별한 API 호출 방지)
         if (buttonEl.textContent === '완료하기') {
           buttonEl.textContent = '취소하기';
@@ -45,7 +45,7 @@ export default (ul, list) => {
       }
 
       // 미완료 영역으로 드롭 시 상태 변화
-      if (notDoneListWrapperEl.contains(ele)) {
+      if (notDoneListWrapperEl && notDoneListWrapperEl.contains(ele)) {
         // 중복 방지(무분별한 API 호출 방지)
         if (buttonEl.textContent === '취소하기') {
           buttonEl.textContent = '완료하기';
@@ -57,6 +57,7 @@ export default (ul, list) => {
           editTodo(ele.id, title, false);
         }
       }
+
       ele.classList.remove('dragging');
     });
   });

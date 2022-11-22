@@ -10,25 +10,20 @@ export default async () => {
     <div class="list-wrap">
       <p>미완료 TODO</p>
       <div class="not-done-list-wrapper"></div>
-      <p>완료 TODO</p>
-      <div class="done-list-wrapper"></div>
     </div>
   `;
 
   // TO-DO list 불러오기 및 렌더링
   const data = await getList();
   syncState(data);
-  todoList('.done-list-wrapper', state.doneList);
   todoList('.not-done-list-wrapper', state.notDoneList);
 
   // To-do list에서 TODO 기능 사용하기
   const list = document.querySelectorAll('.todo-li');
   todoListTool(list);
 
-  const ulEl = document.querySelectorAll('.todo-ul');
-  ulEl.forEach((ele) => {
-    swapList(ele, list);
-  });
+  const ulEl = document.querySelector('.todo-ul');
+  swapList(ulEl, list);
 
   return;
 };
