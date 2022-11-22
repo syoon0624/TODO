@@ -22,6 +22,8 @@ export default async () => {
   const formEl = document.querySelector('.todo-form');
   const inputEl = document.querySelector('input');
 
+  const { pathname } = location;
+
   // todo Post
   await formEl.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -33,8 +35,19 @@ export default async () => {
     // Post 후 재 렌더링
     const list = await getList();
     syncState(list);
-    todoList('.done-list-wrapper', state.doneList);
-    todoList('.not-done-list-wrapper', state.notDoneList);
+    switch (pathname) {
+      case '/done':
+        todoList('.done-list-wrapper', state.doneList);
+        break;
+      case '/notdone':
+        todoList('.not-done-list-wrapper', state.notDoneList);
+        break;
+      default:
+        todoList('.done-list-wrapper', state.doneList);
+        todoList('.not-done-list-wrapper', state.notDoneList);
+        break;
+    }
+
     const editList = document.querySelectorAll('.todo-li');
     todoListTool(editList);
   });

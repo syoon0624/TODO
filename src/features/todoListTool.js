@@ -22,16 +22,23 @@ export default (list) => {
             if (buttonEl.textContent === '완료하기') {
               buttonEl.textContent = '취소하기';
               titleWrapEl.classList.add('done');
-              doneListWrapperEl.insertBefore(ele, doneListWrapperEl.firstChild);
               editTodo(ele.id, title, true);
+              if (doneListWrapperEl) {
+                doneListWrapperEl.insertBefore(
+                  ele,
+                  doneListWrapperEl.firstChild
+                );
+              } else ele.remove();
             } else {
               buttonEl.textContent = '완료하기';
               titleWrapEl.classList.remove('done');
-              notDoneListWrapperEl.insertBefore(
-                ele,
-                notDoneListWrapperEl.firstChild
-              );
               editTodo(ele.id, title, false);
+              if (notDoneListWrapperEl) {
+                notDoneListWrapperEl.insertBefore(
+                  ele,
+                  notDoneListWrapperEl.firstChild
+                );
+              } else ele.remove();
             }
           });
           break;

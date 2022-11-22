@@ -2,9 +2,11 @@ import './scss/main.scss';
 import main from './page/main.js';
 import todoDone from './page/todoDone';
 import todoNotDone from './page/todoNotDone';
+import { header } from './components';
 
 // 랜더 함수
 const renderPage = () => {
+  header();
   const { pathname } = window.location;
   switch (pathname) {
     case '/':

@@ -1,10 +1,8 @@
 import { getList, state } from '../utils';
-import { header, todoList } from '../components';
+import { todoList } from '../components';
 import { swapList, syncState, todoListTool } from '../features';
 
 export default async () => {
-  header();
-
   const mainEl = document.querySelector('main');
   mainEl.innerHTML += `
     <div class="list-wrap">
