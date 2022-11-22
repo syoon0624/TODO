@@ -10,12 +10,17 @@
   }
 }
 header {
-  height: 100px;
-  position: relative;
   border-bottom: 2px solid black;
+  position: fixed;
+  background-color: white;
+  z-index: 1;
+  margin: 0 auto;
+  width: 100%;
   .head-wraper {
+    padding: 20px;
+    height: 60px;
     display: flex;
-    align-items: center;
+    position: relative;
     .form-wrapper {
       input {
         border: none;
@@ -47,7 +52,7 @@ header {
         color: black;
         font-family: 'MaplestoryOTFBold';
         font-size: 30px;
-        padding: 20px;
+        padding: 0px 20px;
       }
     }
 
@@ -88,7 +93,7 @@ form {
 .todo-li {
   color: black;
   .done {
-    color: red;
+    color: green;
   }
   p {
     padding-right: 10px;
@@ -109,8 +114,16 @@ form {
   border: 2px solid blue;
 }
 
-.done-list-wrapper {
-}
+.list-wrap {
+  padding-top: 120px;
+  margin: 0px 20px;
+  .done-list-wrapper {
+    margin: 30px;
+    border-bottom: 1px solid gray;
+  }
 
-.not-done-list-wrapper {
+  .not-done-list-wrapper {
+    margin: 30px;
+    border-bottom: 1px solid gray;
+  }
 }
