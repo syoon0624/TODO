@@ -14,7 +14,7 @@ export default async (todoIds) => {
           headers: {
             'content-type': 'application/json',
             apikey: key,
-            username: 'LeeSeungYoon',
+            username: 'KDT3_LeeSeungYoon',
           },
           body: JSON.stringify({
             todoIds,

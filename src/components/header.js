@@ -1,6 +1,6 @@
 import { getList, createTodo, state } from '../utils';
 import { todoForm, todoList, nav } from '.';
-import { syncState, todoListTool } from '../features';
+import { renderList, swapList, syncState, todoListTool } from '../features';
 
 export default async () => {
   const headerEl = document.querySelector('header');
@@ -53,23 +53,6 @@ export default async () => {
     await createTodo(data);
     inputEl.value = '';
 
-    // Post 후 재 렌더링
-    const list = await getList();
-    syncState(list);
-    switch (pathname) {
-      case '/done':
-        todoList('.done-list-wrapper', state.doneList);
-        break;
-      case '/notdone':
-        todoList('.not-done-list-wrapper', state.notDoneList);
-        break;
-      default:
-        todoList('.done-list-wrapper', state.doneList);
-        todoList('.not-done-list-wrapper', state.notDoneList);
-        break;
-    }
-
-    const editList = document.querySelectorAll('.todo-li');
-    todoListTool(editList);
+    renderList();
   });
 };

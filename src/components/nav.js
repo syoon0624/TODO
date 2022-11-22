@@ -1,6 +1,6 @@
 export default (element) => {
   const el = document.querySelector(element);
-  return (el.innerHTML += `
+  return (el.innerHTML += /* html */ `
     <ul class="nav-ul">
       <li id="home" class="nav-li"><a class="nav-a" href="/">전체</a></li>
       <li id="done" class="nav-li"><a class="nav-a" href="/done">TODO <strong>✔️</strong> </a></li>
