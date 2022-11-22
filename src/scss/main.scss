@@ -1,5 +1,6 @@
 @import 'utils.scss';
 @import 'reset.scss';
+@import 'responsive.scss';
 
 // 메인 화면, 전체 스타일
 
@@ -125,5 +126,45 @@ form {
   .not-done-list-wrapper {
     margin: 30px;
     border-bottom: 1px solid gray;
+  }
+}
+
+@include mobile {
+  header {
+    .head-wraper {
+      .form-wrapper {
+        input {
+          font-size: 15px;
+        }
+        button {
+          font-size: 15px;
+        }
+      }
+      .logo-wrapper {
+        a {
+          font-size: 20px;
+          padding: 0px 10px;
+        }
+      }
+    }
+  }
+  main {
+    .todo-li {
+      p {
+        padding-right: 10px;
+      }
+      padding: 20px;
+      margin: 10px;
+    }
+
+    .list-wrap {
+      .done-list-wrapper {
+        margin: 10px;
+      }
+
+      .not-done-list-wrapper {
+        margin: 10px;
+      }
+    }
   }
 }
