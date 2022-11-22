@@ -9,9 +9,73 @@
     outline: 0;
   }
 }
+header {
+  height: 100px;
+  position: relative;
+  border-bottom: 2px solid black;
+  .head-wraper {
+    display: flex;
+    align-items: center;
+    .form-wrapper {
+      input {
+        border: none;
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+        font-size: 20px;
+        &:focus {
+          box-shadow: 2px 2px 0 0 gray;
+          transition: 0.5s all;
+        }
+      }
+      button {
+        border: none;
+        background-color: white;
+        cursor: pointer;
+        font-size: 20px;
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+        &:hover {
+          background-color: black;
+          color: white;
+        }
+      }
+    }
+    .logo-wrapper {
+      a {
+        display: block;
+        text-decoration: none;
+        color: black;
+        font-family: 'MaplestoryOTFBold';
+        font-size: 30px;
+        padding: 20px;
+      }
+    }
+
+    .nav-bar-wrapper .nav-ul {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      li {
+        border-right: 2px solid black;
+        a {
+          display: block;
+          padding: 10px;
+          font-family: 'Humanbumsuk';
+          text-decoration: none;
+          color: rgb(55, 54, 54);
+        }
+        strong {
+          padding-left: 10px;
+          font-size: 20px;
+          color: red;
+        }
+      }
+    }
+  }
+}
 
 main {
-  border: 2px solid red;
 }
 
 .list-wrap {
@@ -19,7 +83,6 @@ main {
 }
 
 form {
-  border: 2px solid yellow;
 }
 
 .todo-li {
@@ -47,9 +110,7 @@ form {
 }
 
 .done-list-wrapper {
-  border: 2px solid yellow;
 }
 
 .not-done-list-wrapper {
-  border: 2px solid green;
 }

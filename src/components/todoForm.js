@@ -3,7 +3,7 @@ export default (element) => {
   return (el.innerHTML += `
       <form class="todo-form">
         <input placeholder="TODO를 입력하세요!"/>
-        <button class="submit-button" type="submit">입력</button>
+        <button class="submit-button" type="submit">등록</button>
       </form>
     `);
 };

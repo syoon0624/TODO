@@ -2,9 +2,9 @@ export default (element) => {
   const el = document.querySelector(element);
   return (el.innerHTML += `
     <ul class="nav-ul">
-      <li class="nav-li"><a class="nav-a" href="/">전체</a></li>
-      <li class="nav-li"><a class="nav-a" href="/done">완료된 TODO</a></li>
-      <li class="nav-li"><a class="nav-a" href="/notdone">미완료된 TODO</a></li>
+      <li id="home" class="nav-li"><a class="nav-a" href="/">전체</a></li>
+      <li id="done" class="nav-li"><a class="nav-a" href="/done">TODO <strong>✔️</strong> </a></li>
+      <li id="notdone" class="nav-li"><a class="nav-a" href="/notdone">TODO <strong>𝗫</strong></a></li>
     </ul>
       `);
 };

@@ -7,7 +7,7 @@ export default async () => {
   headerEl.innerHTML += `
   <div class="head-wraper">
     <div class="logo-wrapper">
-      <p>TO-DO App</p>
+      <a href="/">TO-DO App</a>
     </div>
     <div class="form-wrapper">
     </div>
@@ -23,6 +23,27 @@ export default async () => {
   const inputEl = document.querySelector('input');
 
   const { pathname } = location;
+  let navEl = document.querySelector('#home > a');
+  // 현재 page에 따른 nav 상태 표시
+  switch (pathname) {
+    case '/':
+      navEl.style.color = 'black';
+      navEl = document.querySelector('#home > a');
+      navEl.style.color = 'gray';
+      break;
+    case '/done':
+      navEl.style.color = 'black';
+      navEl = document.querySelector('#done > a');
+      navEl.style.color = 'gray';
+      break;
+    case '/notdone':
+      navEl.style.color = 'black';
+      navEl = document.querySelector('#notdone > a');
+      navEl.style.color = 'gray';
+      break;
+    default:
+      break;
+  }
 
   // todo Post
   await formEl.addEventListener('submit', async (e) => {
