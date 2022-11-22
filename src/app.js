@@ -8,6 +8,7 @@ import { header } from './components';
 const renderPage = () => {
   header();
   const { pathname } = window.location;
+  console.log(pathname);
   switch (pathname) {
     case '/':
       main();
