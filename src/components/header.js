@@ -29,17 +29,17 @@ export default async () => {
     case '/':
       navEl.style.color = 'black';
       navEl = document.querySelector('#home > a');
-      navEl.style.color = 'gray';
+      navEl.style.color = 'orange';
       break;
     case '/done':
       navEl.style.color = 'black';
       navEl = document.querySelector('#done > a');
-      navEl.style.color = 'gray';
+      navEl.style.color = 'orange';
       break;
     case '/notdone':
       navEl.style.color = 'black';
       navEl = document.querySelector('#notdone > a');
-      navEl.style.color = 'gray';
+      navEl.style.color = 'orange';
       break;
     default:
       break;
