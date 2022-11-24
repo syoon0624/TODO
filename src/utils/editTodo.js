@@ -1,6 +1,6 @@
 const key = process.env.API_KEY;
 //추가(Post)
-export default async (id, title, done, order = 0) => {
+export default async (id, title, done = false, order = 0) => {
   try {
     if (title !== '') {
       const res = await fetch(

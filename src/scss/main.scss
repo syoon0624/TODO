@@ -70,6 +70,9 @@ header {
           font-family: 'Humanbumsuk';
           text-decoration: none;
           color: rgb(55, 54, 54);
+          &:hover {
+            color: orange;
+          }
         }
         strong {
           padding-left: 10px;
@@ -90,26 +93,6 @@ main {
 
 form {
 }
-
-.todo-li {
-  color: black;
-  .done {
-    color: green;
-  }
-  p {
-    padding-right: 10px;
-  }
-  border: 1px solid black;
-  cursor: move;
-  padding: 30px;
-  margin: 30px;
-  display: flex;
-  justify-content: space-between;
-  .tool-wrap {
-    display: flex;
-  }
-}
-
 .dragging {
   opacity: 0.3;
   border: 2px solid blue;
@@ -118,6 +101,70 @@ form {
 .list-wrap {
   padding-top: 120px;
   margin: 0px 20px;
+  .todo-ul {
+    .todo-li {
+      color: black;
+      .title-wrap.done {
+        input {
+          color: green;
+        }
+      }
+      input {
+        padding-right: 10px;
+        font-size: 15px;
+        border: none;
+        border-bottom: 1px solid black;
+        &:disabled {
+          border: none;
+          background-color: white;
+        }
+      }
+      .tool-wrap {
+        .done-button {
+          font-size: 20px;
+          border: 2px solid gray;
+          border-radius: 5px;
+          background-color: white;
+          cursor: pointer;
+          &:hover {
+            border-color: orange;
+          }
+        }
+        .delete-item {
+          border: none;
+          background-color: white;
+          font-size: 20px;
+          cursor: pointer;
+          &:hover {
+            color: orange;
+          }
+        }
+        .edit-button {
+          border: none;
+          background-color: white;
+          font-family: 'MaplestoryOTFBold';
+          margin: 0px 10px;
+          min-width: 70px;
+          cursor: pointer;
+          &:hover {
+            color: orange;
+          }
+        }
+        .done {
+          border: 2px solid green;
+        }
+      }
+      border: 1px solid black;
+      cursor: move;
+      padding: 30px;
+      margin: 30px;
+      display: flex;
+      justify-content: space-between;
+      .tool-wrap {
+        display: flex;
+      }
+    }
+  }
   .done-list-wrapper {
     margin: 30px;
     border-bottom: 1px solid gray;

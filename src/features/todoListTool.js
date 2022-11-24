@@ -8,31 +8,31 @@ export default (list) => {
   );
   list.forEach((ele) => {
     const toolEl = ele.lastElementChild;
-    const titleEl = document.getElementById(ele.id).firstElementChild
-      .firstElementChild;
-    let title = titleEl.textContent;
-
+    const titleEl =
+      ele.firstElementChild.firstElementChild.firstElementChild
+        .firstElementChild;
+    const done = ele.firstElementChild.classList.length === 2 ? true : false;
     [...toolEl.children].forEach((e) => {
       switch (e.className) {
         // 완료하기 버튼
         case 'done-wrap':
-          const buttonEl = e.firstElementChild;
-          const titleWrapEl = document.getElementById(ele.id).firstElementChild;
+          let buttonEl = e.firstElementChild;
           buttonEl.addEventListener('click', () => {
-            if (buttonEl.textContent === '완료하기') {
-              buttonEl.textContent = '취소하기';
-              titleWrapEl.classList.add('done');
-              editTodo(ele.id, title, true);
-              if (doneListWrapperEl) {
-                doneListWrapperEl.insertBefore(
-                  ele,
-                  doneListWrapperEl.firstChild
-                );
-              } else ele.remove();
+            // 완료 여부 확인: 클래스리스트의 개수
+            // 미완료시 1개, 완료시 2개
+            if (buttonEl.classList.length === 1) {
+              buttonEl.classList.add('done');
+              titleEl.classList.add('done');
+              editTodo(ele.id, titleEl.value, true);
+              doneListWrapperEl
+                ? doneListWrapperEl.insertBefore(
+                    ele,
+                    doneListWrapperEl.firstChild
+                  )
+                : ele.remove();
             } else {
-              buttonEl.textContent = '완료하기';
-              titleWrapEl.classList.remove('done');
-              editTodo(ele.id, title, false);
+              buttonEl.classList.remove('done');
+              editTodo(ele.id, titleEl.value, false);
               if (notDoneListWrapperEl) {
                 notDoneListWrapperEl.insertBefore(
                   ele,
@@ -47,31 +47,32 @@ export default (list) => {
         case 'edit-button':
           e.addEventListener('click', () => {
             // 수정할 input, button을 담은 form
-            const editFormEl = e.nextElementSibling;
+            const editFormEl =
+              e.parentElement.parentElement.firstElementChild.firstElementChild;
             const form = editFormEl.firstElementChild;
-
             // 수정하기 버튼 <-> 닫기 버튼 Toggle
             if (e.textContent === '닫기') {
               e.textContent = '수정하기';
-              editFormEl.classList.add('hidden');
+              titleEl.classList.add('edit');
+              titleEl.disabled = true;
+              // 수정할 input 태그의 value값
+              editTodo(ele.id, titleEl.value, done);
             } else {
               e.textContent = '닫기';
+              titleEl.disabled = false;
               // console.log('수정하기 버튼', ele.id);
-
-              editFormEl.classList.remove('hidden');
               form.addEventListener('submit', (event) => {
                 event.preventDefault();
-                // 수정할 input 태그의 value값
-                const { value } = form.firstElementChild;
-
+                const { value } = titleEl;
                 // TODO 글 수정하기
                 if (value === '') {
                   return;
                 } else {
-                  editTodo(ele.id, value, false);
-                  ele.firstElementChild.textContent = value;
-                  title = value;
-                  form.firstElementChild.value = '';
+                  e.textContent = '수정하기';
+                  titleEl.classList.remove('edit');
+                  titleEl.disabled = true;
+                  // 수정할 input 태그의 value값
+                  editTodo(ele.id, value, done);
                 }
               });
             }
