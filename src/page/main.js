@@ -9,10 +9,6 @@ export default async () => {
       <strong>Option</strong>
     </div>
     <div class="list-wrap">
-      <p>미완료 TODO</p>
-      <div class="not-done-list-wrapper"></div>
-      <p>완료 TODO</p>
-      <div class="done-list-wrapper"></div>
     </div>
   `;
 
@@ -24,7 +20,29 @@ export default async () => {
     ele.addEventListener('click', () => {
       switch (ele.id) {
         case 'default':
-          console.log(state.list[0].updatedAt);
+          todoList('.list-wrap', state.list);
+          break;
+        case 'newest':
+          // 깊은 복사
+          state.sortedList = JSON.parse(JSON.stringify(state.list));
+          state.sortedList.sort((a, b) => {
+            if (a.updatedAt < b.updatedAt) return 1;
+            if (a.updatedAt > b.updatedAt) return -1;
+            if (a.updatedAt === b.updatedAt) return 0;
+          });
+          todoList('.list-wrap', state.sortedList);
+          break;
+        case 'oldest':
+          // 깊은 복사
+          state.sortedList = JSON.parse(JSON.stringify(state.list));
+          state.sortedList.sort((a, b) => {
+            if (b.updatedAt < a.updatedAt) return 1;
+            if (b.updatedAt > a.updatedAt) return -1;
+            if (b.updatedAt === a.updatedAt) return 0;
+          });
+          todoList('.list-wrap', state.sortedList);
+          break;
+        case 'filter':
           const listEl = document.querySelector('.list-wrap');
           listEl.innerHTML = /* html */ `
             <p>미완료 TODO</p>
@@ -34,18 +52,6 @@ export default async () => {
           `;
           todoList('.done-list-wrapper', state.doneList);
           todoList('.not-done-list-wrapper', state.notDoneList);
-          break;
-        case 'newest':
-          state.list.sort((a, b) => {
-            if (a.updatedAt < b.updatedAt) return 1;
-            if (a.updatedAt > b.updatedAt) return -1;
-            if (a.updatedAt === b.updatedAt) return 0;
-          });
-          todoList('.list-wrap', state.list);
-          break;
-        case 'oldest':
-          break;
-        case 'filter':
           break;
         default:
           break;

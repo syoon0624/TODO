@@ -3,5 +3,6 @@ export default {
   ids: [],
   doneList: [],
   notDoneList: [],
+  sortedList: [],
   optionToggle: true,
 };

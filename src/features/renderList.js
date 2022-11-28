@@ -17,8 +17,7 @@ export default async () => {
       todoList('.not-done-list-wrapper', state.notDoneList);
       break;
     default:
-      todoList('.done-list-wrapper', state.doneList);
-      todoList('.not-done-list-wrapper', state.notDoneList);
+      todoList('.list-wrap', state.list);
       break;
   }
 
