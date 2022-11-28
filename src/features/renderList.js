@@ -1,10 +1,10 @@
-import { todoList } from '../components';
+import { option, todoList } from '../components';
 import { getList, state } from '../utils';
 import swapList from './swapList';
 import syncState from './syncState';
 import todoListTool from './todoListTool';
 
-// Post 후 재 렌더링
+// 요소 렌더링
 export default async () => {
   const { pathname } = location;
   const list = await getList();
@@ -29,5 +29,17 @@ export default async () => {
 
   ulEl.forEach((ele) => {
     swapList(ele, editList);
+  });
+
+  // 옵션 렌더링
+  option('.option-wrap');
+
+  const optionEl = document.querySelector('.option-wrap');
+  optionEl.addEventListener('click', () => {
+    const optionUlEl = document.querySelector('.option-ul');
+    state.optionToggle
+      ? optionUlEl.classList.remove('hidden')
+      : optionUlEl.classList.add('hidden');
+    state.optionToggle = !state.optionToggle;
   });
 };

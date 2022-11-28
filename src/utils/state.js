@@ -3,4 +3,5 @@ export default {
   ids: [],
   doneList: [],
   notDoneList: [],
+  optionToggle: true,
 };

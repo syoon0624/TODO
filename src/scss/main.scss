@@ -4,6 +4,10 @@
 
 // 메인 화면, 전체 스타일
 
+// html {
+//   filter: invert(100%);
+// }
+
 * {
   font-family: 'Humanbumsuk';
   :focus {
@@ -85,97 +89,120 @@ header {
 }
 
 main {
-}
-
-.list-wrap {
-  flex-wrap: wrap;
-}
-
-form {
-}
-.dragging {
-  opacity: 0.3;
-  border: 2px solid blue;
-}
-
-.list-wrap {
+  background-color: white;
+  position: relative;
   padding-top: 120px;
-  margin: 0px 20px;
-  .todo-ul {
-    .todo-li {
-      color: black;
-      .title-wrap.done {
-        input {
-          color: green;
+  .list-wrap {
+    flex-wrap: wrap;
+  }
+  .option-wrap {
+    font-family: 'MaplestoryOTFBold';
+    position: absolute;
+    top: 100px;
+    right: 0;
+    padding: 10px;
+    border-bottom: 2px solid black;
+    background-color: white;
+    cursor: pointer;
+    &:hover {
+      color: orange;
+    }
+    ul {
+      font-family: 'Humanbumsuk';
+      li {
+        color: black;
+        padding-top: 10px;
+        padding-bottom: 2px;
+        border-bottom: 1px solid gray;
+        &:first-child {
+          padding-top: 10px;
+          border-top: 2px solid black;
         }
-      }
-      input {
-        padding-right: 10px;
-        font-size: 15px;
-        border: none;
-        border-bottom: 1px solid black;
-        &:disabled {
-          border: none;
-          background-color: white;
-        }
-      }
-      .tool-wrap {
-        .done-button {
-          font-size: 20px;
-          border: 2px solid gray;
-          border-radius: 5px;
-          background-color: white;
-          cursor: pointer;
-          &:hover {
-            border-color: orange;
-          }
-        }
-        .delete-item {
-          border: none;
-          background-color: white;
-          font-size: 20px;
-          cursor: pointer;
-          &:hover {
-            color: orange;
-          }
-        }
-        .edit-button {
-          border: none;
-          background-color: white;
-          font-family: 'MaplestoryOTFBold';
-          margin: 0px 10px;
-          min-width: 70px;
-          cursor: pointer;
-          &:hover {
-            color: orange;
-          }
-        }
-        .done {
-          border: 2px solid green;
-        }
-      }
-      border: 1px solid black;
-      cursor: move;
-      padding: 30px;
-      margin: 30px;
-      display: flex;
-      justify-content: space-between;
-      .tool-wrap {
-        display: flex;
       }
     }
   }
-  .done-list-wrapper {
-    margin: 30px;
-    border-bottom: 1px solid gray;
-  }
 
-  .not-done-list-wrapper {
-    margin: 30px;
-    border-bottom: 1px solid gray;
+  .dragging {
+    opacity: 0.3;
+    border: 2px solid blue;
+  }
+  .list-wrap {
+    margin: 0px 20px;
+    .todo-ul {
+      .todo-li {
+        color: black;
+        .title-wrap.done {
+          input {
+            color: green;
+          }
+        }
+        input {
+          padding-right: 10px;
+          font-size: 15px;
+          border: none;
+          border-bottom: 1px solid black;
+          &:disabled {
+            border: none;
+            background-color: white;
+          }
+        }
+        .tool-wrap {
+          .done-button {
+            font-size: 20px;
+            border: 2px solid gray;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            &:hover {
+              border-color: orange;
+            }
+          }
+          .delete-item {
+            border: none;
+            background-color: white;
+            font-size: 20px;
+            cursor: pointer;
+            &:hover {
+              color: orange;
+            }
+          }
+          .edit-button {
+            border: none;
+            background-color: white;
+            font-family: 'MaplestoryOTFBold';
+            margin: 0px 10px;
+            min-width: 70px;
+            cursor: pointer;
+            &:hover {
+              color: orange;
+            }
+          }
+          .done {
+            border: 2px solid green;
+          }
+        }
+        border: 1px solid black;
+        cursor: move;
+        padding: 30px;
+        margin: 30px;
+        display: flex;
+        justify-content: space-between;
+        .tool-wrap {
+          display: flex;
+        }
+      }
+    }
+    .done-list-wrapper {
+      margin: 30px;
+      border-bottom: 1px solid gray;
+    }
+
+    .not-done-list-wrapper {
+      margin: 30px;
+      border-bottom: 1px solid gray;
+    }
   }
 }
-
 @include mobile {
   header {
     .head-wraper {

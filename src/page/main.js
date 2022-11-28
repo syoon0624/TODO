@@ -3,10 +3,8 @@ import { renderList } from '../features';
 export default async () => {
   const mainEl = document.querySelector('main');
   mainEl.innerHTML += /* html */ `
-    <div class="more-wrap">
-      <ul>
-
-      </ul>
+    <div class="option-wrap">
+      <strong>Option</strong>
     </div>
     <div class="list-wrap">
       <p>미완료 TODO</p>
