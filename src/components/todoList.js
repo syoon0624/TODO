@@ -1,3 +1,5 @@
+import { formatDate } from '../features';
+
 export default (element = undefined, data = []) => {
   if (element !== undefined) {
     const el = document.querySelector(element);
@@ -14,6 +16,9 @@ export default (element = undefined, data = []) => {
                   item.title
                 }" disabled placeholder="수정할 TODO를 적어주세요." />
               </form>
+            </div>
+            <div class="date">
+              <p>수정일: <span>${item.updatedAt}</span></p>
             </div>
           </div>
           <div class="tool-wrap">

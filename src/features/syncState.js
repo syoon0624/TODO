@@ -1,4 +1,5 @@
 import { state } from '../utils';
+import formatDate from './formatDate';
 
 export default (data) => {
   // 초기화
@@ -7,8 +8,9 @@ export default (data) => {
   state.list = data;
 
   // 데이터 넣기
-  data.forEach((ele) => {
+  state.list.forEach((ele) => {
     state.ids.push(ele.id);
+    ele.updatedAt = formatDate(ele.updatedAt);
     if (ele.done === true) {
       state.doneList.push(ele);
     } else {
@@ -17,19 +19,15 @@ export default (data) => {
   });
 };
 
-export const setStateTitle = (id, value) => {
+export const setStateTitle = (id, value, date) => {
   const arr = state.list[state.list.findIndex((k) => k.id === id)];
   arr.title = value;
-  arr.done
-    ? (state.doneList[state.doneList.findIndex((k) => k.id === id)].title =
-        value)
-    : (state.notDoneList[
-        state.notDoneList.findIndex((k) => k.id === id)
-      ].title = value);
+  arr.updatedAt = date;
 };
 
-export const setStateDone = (id) => {
+export const setStateDone = (id, date) => {
   const arr = state.list[state.list.findIndex((e) => e.id === id)];
+  arr.updatedAt = date;
   arr.done = !arr.done;
   state.doneList.push(arr);
   state.notDoneList.splice(
@@ -38,8 +36,9 @@ export const setStateDone = (id) => {
   );
 };
 
-export const setStateNotDone = (id) => {
+export const setStateNotDone = (id, date) => {
   const arr = state.list[state.list.findIndex((e) => e.id === id)];
+  arr.updatedAt = date;
   arr.done = !arr.done;
   state.notDoneList.push(arr);
   state.doneList.splice(

@@ -1,4 +1,5 @@
 import { editTodo, state } from '../utils';
+import formatDate from './formatDate';
 import reorderList from './reorderList';
 import { setStateDone, setStateNotDone } from './syncState';
 
@@ -45,7 +46,10 @@ export default (ul, list) => {
           ulWrapEl.insertBefore(ele, ulWrapEl.firstChild);
 
           // state값 갱신
-          setStateDone(ele.id);
+          setStateDone(ele.id, formatDate());
+          // 날짜 갱신
+          titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
+            formatDate();
 
           // 실제 서버상의 값 갱신
           editTodo(ele.id, title, true);
@@ -62,7 +66,10 @@ export default (ul, list) => {
           ulWrapEl.insertBefore(ele, ulWrapEl.firstChild);
 
           // state값 갱신
-          setStateNotDone(ele.id);
+          setStateNotDone(ele.id, formatDate());
+          // 날짜 갱신
+          titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
+            formatDate();
 
           // 실제 서버상의 값 갱신
           editTodo(ele.id, title, false);

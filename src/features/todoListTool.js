@@ -1,4 +1,5 @@
 import { editTodo, deleteTodo, state } from '../utils';
+import formatDate from './formatDate';
 import { setStateDone, setStateNotDone, setStateTitle } from './syncState';
 
 // 각 list 마다 글 수정하기, 완료하기, 삭제하기 버튼 활성화
@@ -27,7 +28,10 @@ export default (list) => {
               titleWrapEl.classList.add('done');
 
               // state 갱신
-              setStateDone(ele.id);
+              setStateDone(ele.id, formatDate());
+              // 날짜 갱신
+              titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
+                formatDate();
 
               editTodo(ele.id, titleEl.value, true);
               if (doneListWrapperEl)
@@ -41,7 +45,10 @@ export default (list) => {
               titleWrapEl.classList.remove('done');
 
               // state 갱신
-              setStateNotDone(ele.id);
+              setStateNotDone(ele.id, formatDate());
+              // 날짜 갱신
+              titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
+                formatDate();
 
               editTodo(ele.id, titleEl.value, false);
               if (notDoneListWrapperEl) {
@@ -67,8 +74,11 @@ export default (list) => {
               titleEl.classList.add('edit');
               titleEl.disabled = true;
 
+              // 날짜 갱신
+              titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
+                formatDate();
               // state 값 갱신
-              setStateTitle(ele.id, titleEl.value);
+              setStateTitle(ele.id, titleEl.value, formatDate());
 
               editTodo(ele.id, titleEl.value, done);
             } else {
@@ -86,7 +96,10 @@ export default (list) => {
                   titleEl.classList.remove('edit');
                   titleEl.disabled = true;
                   // state 값 갱신
-                  setStateTitle(ele.id, value);
+                  setStateTitle(ele.id, value, formatDate());
+                  // 날짜 갱신
+                  titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
+                    formatDate();
 
                   editTodo(ele.id, value, done);
                 }
