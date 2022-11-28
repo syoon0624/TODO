@@ -1,4 +1,5 @@
-import { renderList } from '../features';
+import { renderList, renderOption } from '../features';
+import { state } from '../utils';
 
 export default async () => {
   const mainEl = document.querySelector('main');
@@ -13,7 +14,9 @@ export default async () => {
   `;
 
   // TO-DO list 불러오기 및 렌더링
-  renderList();
+  await renderList();
 
+  // Option
+  renderOption('.not-done-list-wrapper', state.notDoneList);
   return;
 };

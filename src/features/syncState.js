@@ -16,3 +16,34 @@ export default (data) => {
     }
   });
 };
+
+export const setStateTitle = (id, value) => {
+  const arr = state.list[state.list.findIndex((k) => k.id === id)];
+  arr.title = value;
+  arr.done
+    ? (state.doneList[state.doneList.findIndex((k) => k.id === id)].title =
+        value)
+    : (state.notDoneList[
+        state.notDoneList.findIndex((k) => k.id === id)
+      ].title = value);
+};
+
+export const setStateDone = (id) => {
+  const arr = state.list[state.list.findIndex((e) => e.id === id)];
+  arr.done = !arr.done;
+  state.doneList.push(arr);
+  state.notDoneList.splice(
+    state.notDoneList.findIndex((e) => e.id === id),
+    1
+  );
+};
+
+export const setStateNotDone = (id) => {
+  const arr = state.list[state.list.findIndex((e) => e.id === id)];
+  arr.done = !arr.done;
+  state.notDoneList.push(arr);
+  state.doneList.splice(
+    state.doneList.findIndex((e) => e.id === id),
+    1
+  );
+};

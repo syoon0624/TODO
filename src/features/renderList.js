@@ -4,6 +4,17 @@ import swapList from './swapList';
 import syncState from './syncState';
 import todoListTool from './todoListTool';
 
+export const swapSetting = () => {
+  const editList = document.querySelectorAll('.todo-li');
+  todoListTool(editList);
+
+  const ulEl = document.querySelectorAll('.todo-ul');
+
+  ulEl.forEach((ele) => {
+    swapList(ele, editList);
+  });
+};
+
 // 요소 렌더링
 export default async () => {
   const { pathname } = location;
@@ -21,14 +32,7 @@ export default async () => {
       break;
   }
 
-  const editList = document.querySelectorAll('.todo-li');
-  todoListTool(editList);
-
-  const ulEl = document.querySelectorAll('.todo-ul');
-
-  ulEl.forEach((ele) => {
-    swapList(ele, editList);
-  });
+  swapSetting();
 
   // 옵션 렌더링
   option('.option-wrap');

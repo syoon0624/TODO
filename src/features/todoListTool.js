@@ -1,4 +1,5 @@
-import { editTodo, deleteTodo } from '../utils';
+import { editTodo, deleteTodo, state } from '../utils';
+import { setStateDone, setStateNotDone, setStateTitle } from './syncState';
 
 // 각 list 마다 글 수정하기, 완료하기, 삭제하기 버튼 활성화
 export default (list) => {
@@ -8,6 +9,7 @@ export default (list) => {
   );
   list.forEach((ele) => {
     const toolEl = ele.lastElementChild;
+    const titleWrapEl = ele.firstElementChild;
     const titleEl =
       ele.firstElementChild.firstElementChild.firstElementChild
         .firstElementChild;
@@ -22,23 +24,32 @@ export default (list) => {
             // 미완료시 1개, 완료시 2개
             if (buttonEl.classList.length === 1) {
               buttonEl.classList.add('done');
-              titleEl.classList.add('done');
+              titleWrapEl.classList.add('done');
+
+              // state 갱신
+              setStateDone(ele.id);
+
               editTodo(ele.id, titleEl.value, true);
-              doneListWrapperEl
-                ? doneListWrapperEl.insertBefore(
-                    ele,
-                    doneListWrapperEl.firstChild
-                  )
-                : ele.remove();
+              if (doneListWrapperEl)
+                doneListWrapperEl.insertBefore(
+                  ele,
+                  doneListWrapperEl.firstChild
+                );
+              else if (notDoneListWrapperEl) ele.remove();
             } else {
               buttonEl.classList.remove('done');
+              titleWrapEl.classList.remove('done');
+
+              // state 갱신
+              setStateNotDone(ele.id);
+
               editTodo(ele.id, titleEl.value, false);
               if (notDoneListWrapperEl) {
                 notDoneListWrapperEl.insertBefore(
                   ele,
                   notDoneListWrapperEl.firstChild
                 );
-              } else ele.remove();
+              } else if (doneListWrapperEl) ele.remove();
             }
           });
           break;
@@ -55,7 +66,10 @@ export default (list) => {
               e.textContent = '수정하기';
               titleEl.classList.add('edit');
               titleEl.disabled = true;
-              // 수정할 input 태그의 value값
+
+              // state 값 갱신
+              setStateTitle(ele.id, titleEl.value);
+
               editTodo(ele.id, titleEl.value, done);
             } else {
               e.textContent = '닫기';
@@ -71,7 +85,9 @@ export default (list) => {
                   e.textContent = '수정하기';
                   titleEl.classList.remove('edit');
                   titleEl.disabled = true;
-                  // 수정할 input 태그의 value값
+                  // state 값 갱신
+                  setStateTitle(ele.id, value);
+
                   editTodo(ele.id, value, done);
                 }
               });

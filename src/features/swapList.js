@@ -1,5 +1,6 @@
-import { editTodo } from '../utils';
+import { editTodo, state } from '../utils';
 import reorderList from './reorderList';
+import { setStateDone, setStateNotDone } from './syncState';
 
 const getDragAfterElement = (ul, y) => {
   const draggableElements = [...ul.querySelectorAll('.todo-li:not(.dragging)')];
@@ -42,6 +43,11 @@ export default (ul, list) => {
           buttonEl.classList.add('done');
           titleWrapEl.classList.add('done');
           ulWrapEl.insertBefore(ele, ulWrapEl.firstChild);
+
+          // state값 갱신
+          setStateDone(ele.id);
+
+          // 실제 서버상의 값 갱신
           editTodo(ele.id, title, true);
         }
       }
@@ -51,10 +57,14 @@ export default (ul, list) => {
         const ulWrapEl = notDoneListWrapperEl.firstElementChild;
         // 중복 방지(무분별한 API 호출 방지)
         if (buttonEl.classList.contains('done')) {
-          console.log(ele);
           buttonEl.classList.remove('done');
           titleWrapEl.classList.remove('done');
           ulWrapEl.insertBefore(ele, ulWrapEl.firstChild);
+
+          // state값 갱신
+          setStateNotDone(ele.id);
+
+          // 실제 서버상의 값 갱신
           editTodo(ele.id, title, false);
         }
       }
