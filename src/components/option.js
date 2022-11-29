@@ -10,6 +10,11 @@ export default (element) => {
             ? `<li id='filter' class="option-li">완료/미완료 구분해서 보기</li>`
             : ''
         }
+        ${
+          location.pathname === '/trash'
+            ? `<li id='delete-all' class="option-li">휴지통 비우기</li>`
+            : ''
+        }
       </ul>
         `);
 };

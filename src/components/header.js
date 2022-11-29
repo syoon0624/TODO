@@ -1,4 +1,4 @@
-import { getList, createTodo, state } from '../utils';
+import { getList, createTodo, state, Loaders } from '../utils';
 import { todoForm, todoList, nav } from '.';
 import { renderList, swapList, syncState, todoListTool } from '../features';
 
@@ -54,10 +54,16 @@ export default async () => {
   await formEl.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    const loader = new Loaders({
+      el: '.loading',
+    });
+    loader.start();
+
     const data = inputEl.value;
     await createTodo(data);
     inputEl.value = '';
 
     renderList();
+    loader.stop();
   });
 };

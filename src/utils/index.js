@@ -5,3 +5,4 @@ export { default as editTodo } from './editTodo';
 export { default as state } from './state';
 export { default as swapTodo } from './swapTodo';
 export { default as debounce } from './debounce';
+export { default as Loaders } from './loader';

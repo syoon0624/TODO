@@ -1,3 +1,6 @@
+import { formatDate } from '../features';
+import state from './state';
+
 const key = process.env.API_KEY;
 //추가(Post)
 export default async (title, order = 0) => {
@@ -18,6 +21,9 @@ export default async (title, order = 0) => {
       }
     );
     const json = await res.json();
+    json.updatedAt = formatDate(json.updatedAt);
+    state.list.push(json);
+    state.notDoneList.push(json);
     return json;
   } catch (err) {
     console.log(err);

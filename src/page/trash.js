@@ -1,5 +1,5 @@
 import { renderList, renderOption } from '../features';
-import { state } from '../utils';
+import { Loaders, state } from '../utils';
 
 export default async () => {
   const mainEl = document.querySelector('main');
@@ -12,10 +12,14 @@ export default async () => {
   `;
 
   // TO-DO list 불러오기 및 렌더링
+  const loader = new Loaders({
+    el: '.loading',
+  });
+  loader.start();
   await renderList();
 
   // Option 기능
   renderOption('.list-wrap', state.trashList);
-
+  loader.stop();
   return;
 };
