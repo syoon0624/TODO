@@ -5,5 +5,5 @@ export default (data) => {
   const hour = String(date.getHours());
   const minutes = String(date.getMinutes());
   const month = date.getMonth() + 1;
-  return `${year.substring(2)}/${month}/${day} ${hour}:${minutes}`;
+  return `${year.substring(2)}.${month}.${day} ${hour}:${minutes}`;
 };
