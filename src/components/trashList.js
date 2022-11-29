@@ -23,8 +23,8 @@ export default (element = undefined, data = []) => {
               <div class="done-wrap">
                 ${
                   item.done
-                    ? `<button class="done-button done">✔️</button>`
-                    : `<button class="done-button">✔️</button>`
+                    ? `<button class="done-button done disabled">✔️</button>`
+                    : `<button class="done-button disabled">✔️</button>`
                 }
               </div>
               <button class="edit-button">복원하기</button>

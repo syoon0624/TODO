@@ -41,6 +41,11 @@ export default async () => {
       navEl = document.querySelector('#notdone > a');
       navEl.style.color = 'orange';
       break;
+    case '/trash':
+      navEl.style.color = 'black';
+      navEl = document.querySelector('#trash > a');
+      navEl.style.color = 'orange';
+      break;
     default:
       break;
   }

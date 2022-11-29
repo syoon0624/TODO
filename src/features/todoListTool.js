@@ -26,46 +26,48 @@ export default (list) => {
       switch (e.className) {
         // 완료하기 버튼
         case 'done-wrap':
-          let buttonEl = e.firstElementChild;
-          buttonEl.addEventListener('click', () => {
-            // 완료 여부 확인: 클래스리스트의 개수
-            // 미완료시 1개, 완료시 2개
-            if (buttonEl.classList.length === 1) {
-              buttonEl.classList.add('done');
-              titleWrapEl.classList.add('done');
+          const buttonEl = e.firstElementChild;
+          if (location.pathname !== '/trash') {
+            buttonEl.addEventListener('click', () => {
+              // 완료 여부 확인: 클래스리스트의 개수
+              // 미완료시 1개, 완료시 2개
+              if (buttonEl.classList.length === 1) {
+                buttonEl.classList.add('done');
+                titleWrapEl.classList.add('done');
 
-              // state 갱신
-              setStateDone(ele.id, formatDate());
-              // 날짜 갱신
-              titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
-                formatDate();
+                // state 갱신
+                setStateDone(ele.id, formatDate());
+                // 날짜 갱신
+                titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
+                  formatDate();
 
-              editTodo(ele.id, titleEl.value, true);
-              if (doneListWrapperEl)
-                doneListWrapperEl.insertBefore(
-                  ele,
-                  doneListWrapperEl.firstChild
-                );
-              else if (notDoneListWrapperEl) ele.remove();
-            } else {
-              buttonEl.classList.remove('done');
-              titleWrapEl.classList.remove('done');
+                editTodo(ele.id, titleEl.value, true);
+                if (doneListWrapperEl)
+                  doneListWrapperEl.insertBefore(
+                    ele,
+                    doneListWrapperEl.firstChild
+                  );
+                else if (notDoneListWrapperEl) ele.remove();
+              } else {
+                buttonEl.classList.remove('done');
+                titleWrapEl.classList.remove('done');
 
-              // state 갱신
-              setStateNotDone(ele.id, formatDate());
-              // 날짜 갱신
-              titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
-                formatDate();
+                // state 갱신
+                setStateNotDone(ele.id, formatDate());
+                // 날짜 갱신
+                titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
+                  formatDate();
 
-              editTodo(ele.id, titleEl.value, false);
-              if (notDoneListWrapperEl) {
-                notDoneListWrapperEl.insertBefore(
-                  ele,
-                  notDoneListWrapperEl.firstChild
-                );
-              } else if (doneListWrapperEl) ele.remove();
-            }
-          });
+                editTodo(ele.id, titleEl.value, false);
+                if (notDoneListWrapperEl) {
+                  notDoneListWrapperEl.insertBefore(
+                    ele,
+                    notDoneListWrapperEl.firstChild
+                  );
+                } else if (doneListWrapperEl) ele.remove();
+              }
+            });
+          }
           break;
 
         // 수정하기 버튼

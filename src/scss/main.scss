@@ -194,6 +194,11 @@ main {
           .done {
             border: 2px solid green;
           }
+          .disabled {
+            &:hover {
+              background-color: grey;
+            }
+          }
         }
         border: 1px solid black;
         cursor: move;
