@@ -1,20 +1,31 @@
 import { state } from '../utils';
 import formatDate from './formatDate';
 
-export default (data) => {
+const findListIndex = (list, id) => {
+  return list.findIndex((e) => e.id === id);
+};
+
+export default async (data) => {
   // 초기화
   state.doneList = [];
   state.notDoneList = [];
+  state.trashList = [];
   state.list = data;
 
   // 데이터 넣기
-  state.list.forEach((ele) => {
+  await state.list.forEach(async (ele) => {
+    // console.log(ele);
     state.ids.push(ele.id);
     ele.updatedAt = formatDate(ele.updatedAt);
     if (ele.done === true) {
-      state.doneList.push(ele);
+      await state.doneList.push(ele);
     } else {
-      state.notDoneList.push(ele);
+      await state.notDoneList.push(ele);
+    }
+
+    if (ele.order === 99) {
+      // console.log(ele);
+      await setStateTrash(ele.id);
     }
   });
 };
@@ -45,4 +56,33 @@ export const setStateNotDone = (id, date) => {
     state.doneList.findIndex((e) => e.id === id),
     1
   );
+};
+
+// 휴지통으로 보내기
+export const setStateTrash = (id) => {
+  const arr = state.list[findListIndex(state.list, id)];
+  arr.order = 99;
+  state.trashList.push(arr);
+  state.list.splice(findListIndex(state.list, id), 1);
+  if (arr.done) {
+    state.doneList.splice(findListIndex(state.doneList, id), 1);
+  } else {
+    state.notDoneList.splice(findListIndex(state.notDoneList, id), 1);
+  }
+};
+
+// 완전 삭제
+export const deleteState = (id) => {
+  state.trashList.splice(findListIndex(state.trashList, id), 1);
+};
+
+export const restoreState = (id) => {
+  const arr = state.trashList[findListIndex(state.trashList, id)];
+  arr.order = 0;
+  state.list.push(arr);
+  if (arr.done) {
+    state.doneList.push(arr);
+  } else {
+    state.notDoneList.push(arr);
+  }
 };

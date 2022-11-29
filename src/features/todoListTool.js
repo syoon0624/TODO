@@ -1,6 +1,13 @@
 import { editTodo, deleteTodo, state } from '../utils';
 import formatDate from './formatDate';
-import { setStateDone, setStateNotDone, setStateTitle } from './syncState';
+import {
+  deleteState,
+  restoreState,
+  setStateDone,
+  setStateNotDone,
+  setStateTitle,
+  setStateTrash,
+} from './syncState';
 
 // 각 list 마다 글 수정하기, 완료하기, 삭제하기 버튼 활성화
 export default (list) => {
@@ -81,7 +88,7 @@ export default (list) => {
               setStateTitle(ele.id, titleEl.value, formatDate());
 
               editTodo(ele.id, titleEl.value, done);
-            } else {
+            } else if (e.textContent === '수정하기') {
               e.textContent = '닫기';
               titleEl.disabled = false;
               // console.log('수정하기 버튼', ele.id);
@@ -104,6 +111,11 @@ export default (list) => {
                   editTodo(ele.id, value, done);
                 }
               });
+              // 복원하기
+            } else {
+              restoreState(ele.id);
+              editTodo(ele.id, titleEl.value, done);
+              ele.remove();
             }
           });
           break;
@@ -112,7 +124,17 @@ export default (list) => {
         case 'delete-item':
           e.addEventListener('click', () => {
             // console.log('삭제하기 버튼');
-            deleteTodo(ele.id);
+
+            if (location.pathname === '/trash') {
+              // 완전 삭제
+              deleteState(ele.id);
+              deleteTodo(ele.id);
+            } else {
+              // 임시 삭제
+              setStateTrash(ele.id);
+              editTodo(ele.id, titleEl.value, done, 99);
+            }
+
             ele.remove();
           });
           break;

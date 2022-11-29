@@ -4,5 +4,6 @@ export default {
   doneList: [],
   notDoneList: [],
   sortedList: [],
+  trashList: [],
   optionToggle: true,
 };

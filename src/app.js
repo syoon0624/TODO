@@ -3,6 +3,7 @@ import main from './page/main.js';
 import todoDone from './page/todoDone';
 import todoNotDone from './page/todoNotDone';
 import { header } from './components';
+import trash from './page/trash';
 
 // 랜더 함수
 const renderPage = () => {
@@ -18,6 +19,9 @@ const renderPage = () => {
       break;
     case '/notdone':
       todoNotDone();
+      break;
+    case '/trash':
+      trash();
       break;
     default:
       alert('잘못된 주소 링크입니다!');

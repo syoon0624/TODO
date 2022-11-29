@@ -1,4 +1,4 @@
-import { option, todoList } from '../components';
+import { option, todoList, trashList } from '../components';
 import { getList, state } from '../utils';
 import swapList from './swapList';
 import syncState from './syncState';
@@ -19,13 +19,17 @@ export const swapSetting = () => {
 export default async () => {
   const { pathname } = location;
   const list = await getList();
-  syncState(list);
+  // 비동기 처리를 꼭 해주어야 한다.
+  await syncState(list);
   switch (pathname) {
     case '/done':
       todoList('.done-list-wrapper', state.doneList);
       break;
     case '/notdone':
       todoList('.not-done-list-wrapper', state.notDoneList);
+      break;
+    case '/trash':
+      trashList('.list-wrap', state.trashList);
       break;
     default:
       todoList('.list-wrap', state.list);
