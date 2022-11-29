@@ -30,7 +30,7 @@ module.exports = (env, options) => {
           use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
         },
         {
-          // 이미지 포멧: PNG, JP(E)G, GIF, SVG, WEBP
+          // 이미지 포멧: PNG
           test: /\.png$/i,
           use: ['file-loader'],
         },
