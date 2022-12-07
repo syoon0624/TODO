@@ -233,6 +233,7 @@ main {
     .head-wraper {
       .form-wrapper {
         input {
+          width: 100px;
           font-size: 15px;
         }
         button {
@@ -251,11 +252,52 @@ main {
     .list-wrap {
       .todo-ul {
         .todo-li {
+          padding: 7px;
           .title-wrap {
             width: 70%;
           }
           textarea {
             font-size: 15px;
+          }
+          .date {
+            font-size: 8px;
+          }
+          .tool-wrap {
+            .done-button {
+              font-size: 10px;
+              border: 2px solid gray;
+              border-radius: 5px;
+              background-color: white;
+              cursor: pointer;
+            }
+            .delete-item {
+              border: none;
+              background-color: white;
+              font-size: 10px;
+              cursor: pointer;
+              &:hover {
+                color: orange;
+              }
+            }
+            .edit-button {
+              border: none;
+              background-color: white;
+              font-family: 'MaplestoryOTFBold';
+              min-width: 47px;
+              font-size: 10px;
+              cursor: pointer;
+              &:hover {
+                color: orange;
+              }
+            }
+            .done {
+              border: 2px solid green;
+            }
+            .disabled {
+              &:hover {
+                background-color: grey;
+              }
+            }
           }
         }
       }
