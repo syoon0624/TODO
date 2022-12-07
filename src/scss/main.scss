@@ -237,7 +237,8 @@ main {
           font-size: 15px;
         }
         button {
-          font-size: 15px;
+          font-size: 10px;
+          color: black;
         }
       }
       .logo-wrapper {
@@ -283,7 +284,7 @@ main {
               border: none;
               background-color: white;
               font-family: 'MaplestoryOTFBold';
-              min-width: 47px;
+              min-width: 50px;
               font-size: 10px;
               cursor: pointer;
               &:hover {
