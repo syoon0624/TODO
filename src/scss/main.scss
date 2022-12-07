@@ -235,9 +235,12 @@ main {
         input {
           width: 100px;
           font-size: 15px;
+          border: none;
+          border-right: 1px solid black;
+          border-bottom: 1px solid black;
         }
         button {
-          font-size: 10px;
+          font-size: 15px;
           color: black;
         }
       }
@@ -284,7 +287,7 @@ main {
               border: none;
               background-color: white;
               font-family: 'MaplestoryOTFBold';
-              min-width: 50px;
+              min-width: 55px;
               font-size: 10px;
               cursor: pointer;
               &:hover {
