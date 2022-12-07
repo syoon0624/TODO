@@ -1,4 +1,4 @@
-import { option, todoList, trashList } from '../components';
+import { todoList, trashList } from '../components';
 import { getList, state } from '../utils';
 import swapList from './swapList';
 import syncState from './syncState';
@@ -37,17 +37,4 @@ export default async () => {
   }
 
   swapSetting();
-
-  // 옵션 렌더링
-  // option('.option-wrap');
-
-  // const optionEl = document.querySelector('.option-wrap');
-  // optionEl.addEventListener('click', () => {
-  //   console.log('클릭');
-  //   const optionUlEl = document.querySelector('.option-ul');
-  //   state.optionToggle
-  //     ? optionUlEl.classList.remove('hidden')
-  //     : optionUlEl.classList.add('hidden');
-  //   state.optionToggle = !state.optionToggle;
-  // });
 };

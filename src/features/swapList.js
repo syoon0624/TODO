@@ -1,7 +1,7 @@
-import { editTodo, state } from '../utils';
+import { editTodo } from '../utils';
 import formatDate from './formatDate';
 import reorderList from './reorderList';
-import { setStateDone, setStateNotDone } from './syncState';
+import { setStateDo } from './syncState';
 
 const getDragAfterElement = (ul, y) => {
   const draggableElements = [...ul.querySelectorAll('.todo-li:not(.dragging)')];
@@ -30,11 +30,9 @@ export default (ul, list) => {
     });
 
     ele.addEventListener('dragend', (e) => {
-      const title =
-        ele.firstElementChild.firstElementChild.firstElementChild
-          .firstElementChild.value;
-      const buttonEl = ele.lastElementChild.firstElementChild.firstElementChild;
-      const titleWrapEl = ele.firstElementChild;
+      const title = ele.querySelector('.edit').value;
+      const buttonEl = ele.querySelector('.done-button');
+      const titleWrapEl = ele.querySelector('.title-wrap');
 
       // 완료 영역으로 드롭 시 상태 변화
       if (doneListWrapperEl && doneListWrapperEl.contains(ele)) {
@@ -46,9 +44,9 @@ export default (ul, list) => {
           ulWrapEl.insertBefore(ele, ulWrapEl.firstChild);
 
           // state값 갱신
-          setStateDone(ele.id, formatDate());
+          setStateDo(ele.id, formatDate(), true);
           // 날짜 갱신
-          titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
+          titleWrapEl.querySelector('.date > p > span').textContent =
             formatDate();
 
           // 실제 서버상의 값 갱신
@@ -66,11 +64,10 @@ export default (ul, list) => {
           ulWrapEl.insertBefore(ele, ulWrapEl.firstChild);
 
           // state값 갱신
-          setStateNotDone(ele.id, formatDate());
+          setStateDo(ele.id, formatDate(), false);
           // 날짜 갱신
-          titleWrapEl.lastElementChild.firstElementChild.firstElementChild.textContent =
+          titleWrapEl.querySelector('.date > p > span').textContent =
             formatDate();
-
           // 실제 서버상의 값 갱신
           editTodo(ele.id, title, false);
         }
@@ -80,10 +77,10 @@ export default (ul, list) => {
     });
   });
 
+  // 모든 drag & drop이 종료 시, 아이템 이동
   ul.addEventListener('dragover', (e) => {
     e.preventDefault();
     const afterElement = getDragAfterElement(ul, e.clientY);
-    //console.log(afterElement);
     const draggable = document.querySelector('.dragging');
     if (afterElement === undefined) {
       ul.appendChild(draggable);

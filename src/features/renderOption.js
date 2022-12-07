@@ -3,12 +3,12 @@ import { deleteTodo, Loaders, state } from '../utils';
 import { swapSetting } from './renderList';
 import { deleteState } from './syncState';
 
+// option 항목 보여주기/숨기기
 const rendering = () => {
   option('.option-wrap');
 
   const optionEl = document.querySelector('.option-wrap');
   optionEl.addEventListener('click', () => {
-    console.log('클릭');
     const optionUlEl = document.querySelector('.option-ul');
     state.optionToggle
       ? optionUlEl.classList.remove('hidden')
@@ -17,15 +17,18 @@ const rendering = () => {
   });
 };
 
+// 옵션별 기능
 export default (className, list) => {
   rendering();
   const optionEl = document.querySelectorAll('.option-li');
   optionEl.forEach((ele) => {
     ele.addEventListener('click', async () => {
       switch (ele.id) {
+        // 기본 보여주기
         case 'default':
           todoList(className, list);
           break;
+        // 최신 순으로 정렬
         case 'newest':
           // 깊은 복사
           state.sortedList = JSON.parse(JSON.stringify(list));
@@ -37,6 +40,7 @@ export default (className, list) => {
           todoList(className, state.sortedList);
           swapSetting();
           break;
+        // 오래된 순으로 정렬
         case 'oldest':
           // 깊은 복사
           state.sortedList = JSON.parse(JSON.stringify(list));
@@ -48,6 +52,7 @@ export default (className, list) => {
           todoList(className, state.sortedList);
           swapSetting();
           break;
+        // 완료/미완료 구분
         case 'filter':
           const listEl = document.querySelector('.list-wrap');
           listEl.innerHTML = /* html */ `
@@ -60,6 +65,7 @@ export default (className, list) => {
           todoList('.not-done-list-wrapper', state.notDoneList);
           swapSetting();
           break;
+        // 휴지통 비우기
         case 'delete-all':
           const trashEls = document.querySelectorAll('.todo-li');
           const trashUl = document.querySelector('.todo-ul');

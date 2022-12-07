@@ -14,7 +14,6 @@ export default async (data) => {
 
   // 데이터 넣기
   await state.list.forEach(async (ele) => {
-    // console.log(ele);
     state.ids.push(ele.id);
     ele.updatedAt = formatDate(ele.updatedAt);
     if (ele.done === true) {
@@ -24,36 +23,28 @@ export default async (data) => {
     }
 
     if (ele.order === 99) {
-      // console.log(ele);
       await setStateTrash(ele.id);
     }
   });
 };
 
+// 할일 문장
 export const setStateTitle = (id, value, date) => {
-  const arr = state.list[state.list.findIndex((k) => k.id === id)];
+  const arr = state.list[findListIndex(state.list, id)];
   arr.title = value;
   arr.updatedAt = date;
 };
 
-export const setStateDone = (id, date) => {
+// 완료/미완료로 바뀜 시 리스트 set
+export const setStateDo = (id, date, isDone) => {
   const arr = state.list[state.list.findIndex((e) => e.id === id)];
   arr.updatedAt = date;
   arr.done = !arr.done;
-  state.doneList.push(arr);
-  state.notDoneList.splice(
-    state.notDoneList.findIndex((e) => e.id === id),
-    1
-  );
-};
-
-export const setStateNotDone = (id, date) => {
-  const arr = state.list[state.list.findIndex((e) => e.id === id)];
-  arr.updatedAt = date;
-  arr.done = !arr.done;
-  state.notDoneList.push(arr);
-  state.doneList.splice(
-    state.doneList.findIndex((e) => e.id === id),
+  const list = isDone ? state.notDoneList : state.doneList;
+  const spliceList = isDone ? state.doneList : state.notDoneList;
+  list.push(arr);
+  spliceList.splice(
+    spliceList.findIndex((e) => e.id === id),
     1
   );
 };
@@ -76,6 +67,7 @@ export const deleteState = (id) => {
   state.trashList.splice(findListIndex(state.trashList, id), 1);
 };
 
+// 복원하기
 export const restoreState = (id) => {
   const arr = state.trashList[findListIndex(state.trashList, id)];
   arr.order = 0;

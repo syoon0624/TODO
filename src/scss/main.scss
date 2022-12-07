@@ -93,9 +93,6 @@ main {
   background-color: white;
   position: relative;
   padding-top: 120px;
-  .list-wrap {
-    flex-wrap: wrap;
-  }
   .option-wrap {
     z-index: 1;
     font-family: 'MaplestoryOTFBold';
@@ -132,22 +129,29 @@ main {
     border: 2px solid blue;
   }
   .list-wrap {
+    flex-wrap: wrap;
     margin: 0px 20px;
     .todo-ul {
       .todo-li {
         color: black;
         position: relative;
         .title-wrap.done {
-          input {
+          textarea {
             color: green;
           }
         }
-        input {
+        .title-wrap {
+          width: 70%;
+        }
+        textarea {
+          resize: none;
           display: block;
           padding-right: 10px;
-          font-size: 15px;
+          font-size: 20px;
           border: none;
+          width: 90%;
           border-bottom: 1px solid black;
+          border-right: 1px solid black;
           padding-top: 10px;
           &:disabled {
             border: none;
@@ -162,6 +166,8 @@ main {
           color: rgb(155, 151, 144);
         }
         .tool-wrap {
+          display: flex;
+          align-items: center;
           .done-button {
             font-size: 20px;
             border: 2px solid gray;
@@ -185,7 +191,6 @@ main {
             border: none;
             background-color: white;
             font-family: 'MaplestoryOTFBold';
-            margin: 0px 10px;
             min-width: 70px;
             cursor: pointer;
             &:hover {
@@ -243,12 +248,17 @@ main {
     }
   }
   main {
-    .todo-li {
-      p {
-        padding-right: 10px;
+    .list-wrap {
+      .todo-ul {
+        .todo-li {
+          .title-wrap {
+            width: 70%;
+          }
+          textarea {
+            font-size: 15px;
+          }
+        }
       }
-      padding: 20px;
-      margin: 10px;
     }
 
     .list-wrap {
