@@ -10,9 +10,9 @@ export default (element = undefined, data = []) => {
             <div class="title-wrap ${item.done ? 'done' : ''}">
               <div class="edit-item">
                 <form class="edit-form">
-                  <input class="edit" value="${
+                  <textarea class="edit" disabled placeholder="수정할 TODO를 적어주세요." >${
                     item.title
-                  }" disabled placeholder="수정할 TODO를 적어주세요." />
+                  }</textarea>
                 </form>
               </div>
               <div class="date">
