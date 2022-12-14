@@ -1,7 +1,7 @@
 import { debounce, swapTodo } from '../utils';
 
 // 재정렬된 리스트 서버에 최신화
-export default debounce(() => {
+const reorderList = debounce(() => {
   const list = document.querySelectorAll('.todo-li');
   const ids = [];
 
@@ -11,3 +11,5 @@ export default debounce(() => {
 
   swapTodo(ids);
 }, 300);
+
+export { reorderList };

@@ -1,8 +1,8 @@
-import { getList, createTodo, state, Loaders } from '../utils';
-import { todoForm, todoList, nav } from '.';
-import { renderList, swapList, syncState, todoListTool } from '../features';
+import { createTodo, Loaders } from '../utils';
+import { todoForm, nav } from '.';
+import { renderList } from '../features';
 
-export default async () => {
+const header = async () => {
   const headerEl = document.querySelector('header');
   headerEl.innerHTML += `
   <div class="head-wraper">
@@ -67,3 +67,5 @@ export default async () => {
     loader.stop();
   });
 };
+
+export { header };

@@ -1,7 +1,6 @@
 import { option, todoList } from '../components';
-import { deleteTodo, Loaders, state } from '../utils';
+import { deleteTodo, Loaders, state, deleteState } from '../utils';
 import { swapSetting } from './renderList';
-import { deleteState } from './syncState';
 
 // option 항목 보여주기/숨기기
 const rendering = () => {
@@ -18,7 +17,7 @@ const rendering = () => {
 };
 
 // 옵션별 기능
-export default (className, list) => {
+const renderOption = (className, list) => {
   rendering();
   const optionEl = document.querySelectorAll('.option-li');
   optionEl.forEach((ele) => {
@@ -88,3 +87,5 @@ export default (className, list) => {
     });
   });
 };
+
+export { renderOption };

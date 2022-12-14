@@ -1,4 +1,4 @@
-export default (element) => {
+const option = (element) => {
   const el = document.querySelector(element);
   return (el.innerHTML += /* html */ `
       <ul class="option-ul hidden">
@@ -18,3 +18,5 @@ export default (element) => {
       </ul>
         `);
 };
+
+export { option };

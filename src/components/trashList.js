@@ -1,4 +1,4 @@
-export default (element = undefined, data = []) => {
+const trashList = (element = undefined, data = []) => {
   if (element !== undefined) {
     const el = document.querySelector(element);
     return (el.innerHTML = /* html */ `
@@ -38,3 +38,5 @@ export default (element = undefined, data = []) => {
   }
   return false;
 };
+
+export { trashList };

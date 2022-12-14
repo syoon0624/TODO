@@ -1,4 +1,4 @@
-export default (element) => {
+const todoForm = (element) => {
   const el = document.querySelector(element);
   return (el.innerHTML += /* html */ `
       <form class="todo-form">
@@ -7,3 +7,5 @@ export default (element) => {
       </form>
     `);
 };
+
+export { todoForm };

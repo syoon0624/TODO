@@ -1,6 +1,6 @@
-export { default as todoForm } from './todoForm';
-export { default as todoList } from './todoList';
-export { default as header } from './header';
-export { default as nav } from './nav';
-export { default as option } from './option';
-export { default as trashList } from './trashList';
+export * from './todoForm';
+export * from './todoList';
+export * from './header';
+export * from './nav';
+export * from './option';
+export * from './trashList';

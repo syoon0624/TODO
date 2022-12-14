@@ -1,7 +1,6 @@
-import { editTodo } from '../utils';
-import formatDate from './formatDate';
-import reorderList from './reorderList';
-import { setStateDo } from './syncState';
+import { editTodo, setStateDo } from '../utils';
+import { formatDate } from './formatDate';
+import { reorderList } from './reorderList';
 
 const getDragAfterElement = (ul, y) => {
   const draggableElements = [...ul.querySelectorAll('.todo-li:not(.dragging)')];
@@ -20,7 +19,7 @@ const getDragAfterElement = (ul, y) => {
   ).element;
 };
 
-export default (ul, list) => {
+const swapList = (ul, list) => {
   const doneListWrapperEl = document.querySelector('.done-list-wrapper');
   const notDoneListWrapperEl = document.querySelector('.not-done-list-wrapper');
 
@@ -90,3 +89,5 @@ export default (ul, list) => {
     reorderList();
   });
 };
+
+export { swapList };

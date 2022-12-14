@@ -1,10 +1,10 @@
 import { todoList, trashList } from '../components';
-import { getList, state } from '../utils';
-import swapList from './swapList';
-import syncState from './syncState';
-import todoListTool from './todoListTool';
+import { getList, state, syncState } from '../utils';
+import { swapList } from './swapList';
+import { todoListTool } from './todoListTool';
 
-export const swapSetting = () => {
+// 리스트 swap 시 요소들 세팅
+const swapSetting = () => {
   const editList = document.querySelectorAll('.todo-li');
   todoListTool(editList);
 
@@ -16,7 +16,7 @@ export const swapSetting = () => {
 };
 
 // 요소 렌더링
-export default async () => {
+const renderList = async () => {
   const { pathname } = location;
   const list = await getList();
   // 비동기 처리를 꼭 해주어야 한다.
@@ -38,3 +38,5 @@ export default async () => {
 
   swapSetting();
 };
+
+export { swapSetting, renderList };

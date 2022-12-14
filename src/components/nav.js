@@ -1,4 +1,4 @@
-export default (element) => {
+const nav = (element) => {
   const el = document.querySelector(element);
   return (el.innerHTML += /* html */ `
     <ul class="nav-ul">
@@ -9,3 +9,5 @@ export default (element) => {
     </ul>
       `);
 };
+
+export { nav };

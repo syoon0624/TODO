@@ -1,12 +1,13 @@
-import { editTodo, deleteTodo } from '../utils';
-import formatDate from './formatDate';
 import {
+  editTodo,
+  deleteTodo,
   deleteState,
   restoreState,
   setStateDo,
   setStateTitle,
   setStateTrash,
-} from './syncState';
+} from '../utils';
+import { formatDate } from './formatDate';
 
 // 완료하기-미완료하기 토글 버튼 핸들링
 const doneButtonHandle = (event) => {
@@ -105,7 +106,7 @@ const deleteButtonHandle = (event) => {
 };
 
 // 각 list 마다 글 수정하기, 완료하기, 삭제하기 버튼 활성화
-export default (list) => {
+const todoListTool = (list) => {
   list.forEach((ele) => {
     const toolEl = ele.querySelector('.tool-wrap');
     [...toolEl.children].forEach((e) => {
@@ -135,3 +136,5 @@ export default (list) => {
   });
   return true;
 };
+
+export { todoListTool };
