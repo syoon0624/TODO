@@ -42,15 +42,19 @@ const renderOption = (className, list) => {
         // 오래된 순으로 정렬
         case 'oldest':
           // 깊은 복사
-          state.sortedList = JSON.parse(JSON.stringify(list));
-          state.sortedList.sort((a, b) => {
-            if (b.updatedAt < a.updatedAt) return 1;
-            if (b.updatedAt > a.updatedAt) return -1;
-            if (b.updatedAt === a.updatedAt) return 0;
-          });
-          todoList(className, state.sortedList);
-          swapSetting();
-          break;
+          try {
+            state.sortedList = JSON.parse(JSON.stringify(list));
+            state.sortedList.sort((a, b) => {
+              if (b.updatedAt < a.updatedAt) return 1;
+              if (b.updatedAt > a.updatedAt) return -1;
+              if (b.updatedAt === a.updatedAt) return 0;
+            });
+            todoList(className, state.sortedList);
+            swapSetting();
+            break;
+          } catch {
+            break;
+          }
         // 완료/미완료 구분
         case 'filter':
           const listEl = document.querySelector('.list-wrap');
