@@ -23,32 +23,16 @@ const header = async () => {
   const inputEl = document.querySelector('input');
 
   const { pathname } = location;
-  let navEl = document.querySelector('#home > a');
-  // 현재 page에 따른 nav 상태 표시
-  switch (pathname) {
-    case '/':
-      navEl.style.color = 'black';
-      navEl = document.querySelector('#home > a');
-      navEl.style.color = 'orange';
-      break;
-    case '/done':
-      navEl.style.color = 'black';
-      navEl = document.querySelector('#done > a');
-      navEl.style.color = 'orange';
-      break;
-    case '/notdone':
-      navEl.style.color = 'black';
-      navEl = document.querySelector('#notdone > a');
-      navEl.style.color = 'orange';
-      break;
-    case '/trash':
-      navEl.style.color = 'black';
-      navEl = document.querySelector('#trash > a');
-      navEl.style.color = 'orange';
-      break;
-    default:
-      break;
-  }
+  const anchorEls = document.querySelectorAll('.nav-li');
+
+  // nav별 글자 색 표시
+  anchorEls.forEach((anchorEl) => {
+    const href = anchorEl.id;
+    const aEl = anchorEl.querySelector('a');
+    pathname === href
+      ? (aEl.style.color = 'orange')
+      : (aEl.style.color = 'black');
+  });
 
   // todo Post
   await formEl.addEventListener('submit', async (e) => {
