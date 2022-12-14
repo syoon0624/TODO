@@ -1,4 +1,3 @@
-import { option } from '../components';
 import { renderList, renderOption } from '../features';
 import { Loaders, state } from '../utils';
 
