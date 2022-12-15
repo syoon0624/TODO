@@ -20,15 +20,15 @@ const todoList = (element = undefined, data = []) => {
             </div>
           </div>
           <div class="tool-wrap">
-            <div class="done-wrap">
+            <div data-category="done" class="done-wrap">
               ${
                 item.done
                   ? `<button class="done-button done">✔️</button>`
                   : `<button class="done-button">✔️</button>`
               }
             </div>
-            <button class="edit-button">수정하기</button>
-            <button class="delete-item">X</button>
+            <button data-category="edit" class="edit-button">수정하기</button>
+            <button data-category="delete" class="delete-item">X</button>
           </div>
         </li>`;
         })

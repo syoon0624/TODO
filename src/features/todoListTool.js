@@ -61,7 +61,6 @@ const editButtonHandle = (event) => {
   const liWrapEl = event.target.closest('.todo-li');
   const done = liWrapEl.querySelector('.title-wrap').classList.contains('done');
   const titleEl = liWrapEl.querySelector('.edit-form > .edit');
-  const form = liWrapEl.querySelector('.edit-form');
 
   // 수정하기 버튼 <-> 닫기 버튼 Toggle
   if (targetEl.textContent === '닫기') {
@@ -110,23 +109,23 @@ const todoListTool = (list) => {
   list.forEach((ele) => {
     const toolEl = ele.querySelector('.tool-wrap');
     [...toolEl.children].forEach((e) => {
-      switch (e.className) {
+      switch (e.dataset.category) {
         // 완료하기 버튼
-        case 'done-wrap':
+        case 'done':
           const buttonEl = e.querySelector('.done-button');
           if (location.pathname !== '/trash') {
-            buttonEl.addEventListener('click', doneButtonHandle);
+            buttonEl.onclick = doneButtonHandle;
           }
           break;
 
         // 수정하기 버튼
-        case 'edit-button':
-          e.addEventListener('click', editButtonHandle);
+        case 'edit':
+          e.onclick = editButtonHandle;
           break;
 
         // 삭제하기 버튼
-        case 'delete-item':
-          e.addEventListener('click', deleteButtonHandle);
+        case 'delete':
+          e.onclick = deleteButtonHandle;
           break;
 
         default:

@@ -13,9 +13,10 @@ const state = {
 
 // 해당 리스트의 인덱스 찾기
 const findListIndex = (list, id) => {
-  return list.findIndex((e) => e.id === id);
+  return list.findIndex((item) => item.id === id);
 };
 
+// store Render
 const syncState = async (data) => {
   // 초기화
   state.doneList = [];
@@ -48,16 +49,13 @@ const setStateTitle = (id, value, date) => {
 
 // 완료/미완료로 바뀜 시 리스트 set
 const setStateDo = (id, date, isDone) => {
-  const arr = state.list[state.list.findIndex((e) => e.id === id)];
+  const arr = state.list[findListIndex(state.list, id)];
   arr.updatedAt = date;
   arr.done = !arr.done;
   const list = isDone ? state.notDoneList : state.doneList;
   const spliceList = isDone ? state.doneList : state.notDoneList;
   list.push(arr);
-  spliceList.splice(
-    spliceList.findIndex((e) => e.id === id),
-    1
-  );
+  spliceList.splice(findListIndex(spliceList, id), 1);
 };
 
 // 휴지통으로 보내기

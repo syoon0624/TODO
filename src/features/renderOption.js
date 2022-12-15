@@ -7,13 +7,13 @@ const rendering = () => {
   option('.option-wrap');
 
   const optionEl = document.querySelector('.option-wrap');
-  optionEl.addEventListener('click', () => {
+  optionEl.onclick = () => {
     const optionUlEl = document.querySelector('.option-ul');
     state.optionToggle
       ? optionUlEl.classList.remove('hidden')
       : optionUlEl.classList.add('hidden');
     state.optionToggle = !state.optionToggle;
-  });
+  };
 };
 
 // 옵션별 기능
@@ -21,7 +21,7 @@ const renderOption = (className, list) => {
   rendering();
   const optionEl = document.querySelectorAll('.option-li');
   optionEl.forEach((ele) => {
-    ele.addEventListener('click', async () => {
+    ele.onclick = async () => {
       switch (ele.id) {
         // 기본 보여주기
         case 'default':
@@ -88,7 +88,7 @@ const renderOption = (className, list) => {
         default:
           break;
       }
-    });
+    };
   });
 };
 
