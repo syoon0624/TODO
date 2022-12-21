@@ -1,5 +1,5 @@
 import { todoList, trashList } from '../components';
-import { getList, state, syncState } from '../utils';
+import { state } from '../utils';
 import { swapList } from './swapList';
 import { todoListTool } from './todoListTool';
 
@@ -18,9 +18,6 @@ const swapSetting = () => {
 // 요소 렌더링
 const renderList = async () => {
   const { pathname } = location;
-  const list = await getList();
-  // 비동기 처리를 꼭 해주어야 한다.
-  await syncState(list);
   switch (pathname) {
     case '/done':
       todoList('.done-list-wrapper', state.doneList);

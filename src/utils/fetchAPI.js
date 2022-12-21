@@ -1,5 +1,5 @@
 import { formatDate } from '../features';
-import { state } from './state';
+import { state } from './store';
 
 const key = process.env.API_KEY;
 const headers = {
@@ -87,19 +87,15 @@ const deleteTodo = async (id) => {
 // 목록 순서 변경(Put)
 const swapTodo = async (todoIds) => {
   try {
-    const isSame = JSON.stringify(todoIds) === JSON.stringify(state.ids);
-    if (!isSame) {
-      state.ids = todoIds;
-      const res = await fetch(`${url}/reorder`, {
-        method: 'PUT',
-        headers,
-        body: JSON.stringify({
-          todoIds,
-        }),
-      });
-      const json = await res.json();
-      return json;
-    } else return;
+    const res = await fetch(`${url}/reorder`, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify({
+        todoIds,
+      }),
+    });
+    const json = await res.json();
+    return json;
   } catch (err) {
     console.log(err);
     return;

@@ -2,17 +2,18 @@ import { option, todoList } from '../components';
 import { deleteTodo, Loaders, state, deleteState } from '../utils';
 import { swapSetting } from './renderList';
 
+let optionToggle = true;
+
 // option 항목 보여주기/숨기기
 const rendering = () => {
   option('.option-wrap');
-
   const optionEl = document.querySelector('.option-wrap');
   optionEl.onclick = () => {
     const optionUlEl = document.querySelector('.option-ul');
-    state.optionToggle
+    optionToggle
       ? optionUlEl.classList.remove('hidden')
       : optionUlEl.classList.add('hidden');
-    state.optionToggle = !state.optionToggle;
+    optionToggle = !optionToggle;
   };
 };
 
@@ -30,26 +31,26 @@ const renderOption = (className, list) => {
         // 최신 순으로 정렬
         case 'newest':
           // 깊은 복사
-          state.sortedList = JSON.parse(JSON.stringify(list));
-          state.sortedList.sort((a, b) => {
+          const sortedList = JSON.parse(JSON.stringify(list));
+          sortedList.sort((a, b) => {
             if (a.updatedAt < b.updatedAt) return 1;
             if (a.updatedAt > b.updatedAt) return -1;
             if (a.updatedAt === b.updatedAt) return 0;
           });
-          todoList(className, state.sortedList);
+          todoList(className, sortedList);
           swapSetting();
           break;
         // 오래된 순으로 정렬
         case 'oldest':
           // 깊은 복사
           try {
-            state.sortedList = JSON.parse(JSON.stringify(list));
-            state.sortedList.sort((a, b) => {
+            const sortedList = JSON.parse(JSON.stringify(list));
+            sortedList.sort((a, b) => {
               if (b.updatedAt < a.updatedAt) return 1;
               if (b.updatedAt > a.updatedAt) return -1;
               if (b.updatedAt === a.updatedAt) return 0;
             });
-            todoList(className, state.sortedList);
+            todoList(className, sortedList);
             swapSetting();
             break;
           } catch {

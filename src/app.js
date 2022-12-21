@@ -4,6 +4,7 @@ import todoDone from './page/todoDone';
 import todoNotDone from './page/todoNotDone';
 import { header } from './components';
 import trash from './page/trash';
+import { initialState } from './utils';
 
 // 랜더 함수
 const renderPage = () => {
@@ -31,7 +32,8 @@ const renderPage = () => {
 };
 
 // 초기 실행
-(() => {
+(async () => {
+  await initialState();
   window.addEventListener('popstate', () => {
     renderPage();
   });

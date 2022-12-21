@@ -1,3 +1,5 @@
+import { formatDate } from '../features';
+
 const todoList = (element = undefined, data = []) => {
   if (element !== undefined) {
     const el = document.querySelector(element);
