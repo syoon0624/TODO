@@ -1,5 +1,5 @@
 import { option, todoList } from '../components';
-import { deleteTodo, Loaders, state, deleteState } from '../utils';
+import { deleteTodo, Loaders, store, deleteState } from '../utils';
 import { swapSetting } from './renderList';
 
 let optionToggle = true;
@@ -10,9 +10,7 @@ const rendering = () => {
   const optionEl = document.querySelector('.option-wrap');
   optionEl.onclick = () => {
     const optionUlEl = document.querySelector('.option-ul');
-    optionToggle
-      ? optionUlEl.classList.remove('hidden')
-      : optionUlEl.classList.add('hidden');
+    optionToggle ? optionUlEl.classList.remove('hidden') : optionUlEl.classList.add('hidden');
     optionToggle = !optionToggle;
   };
 };
@@ -65,8 +63,8 @@ const renderOption = (className, list) => {
             <p>완료 TODO</p>
           <div class="done-list-wrapper"></div>
         `;
-          todoList('.done-list-wrapper', state.doneList);
-          todoList('.not-done-list-wrapper', state.notDoneList);
+          todoList('.done-list-wrapper', store.getState().doneList);
+          todoList('.not-done-list-wrapper', store.getState().notDoneList);
           swapSetting();
           break;
         // 휴지통 비우기

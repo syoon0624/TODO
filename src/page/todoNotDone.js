@@ -1,5 +1,5 @@
 import { renderList, renderOption } from '../features';
-import { Loaders, state } from '../utils';
+import { Loaders, store } from '../utils';
 
 export default async () => {
   const mainEl = document.querySelector('main');
@@ -21,7 +21,7 @@ export default async () => {
   await renderList();
 
   // Option
-  renderOption('.not-done-list-wrapper', state.notDoneList);
+  renderOption('.not-done-list-wrapper', store.getState().notDoneList);
   loader.stop();
   return;
 };

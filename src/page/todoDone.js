@@ -1,5 +1,5 @@
 import { renderList, renderOption } from '../features';
-import { Loaders, state } from '../utils';
+import { Loaders, store } from '../utils';
 
 export default async () => {
   const mainEl = document.querySelector('main');
@@ -21,7 +21,7 @@ export default async () => {
   await renderList();
 
   // Option 기능
-  renderOption('.done-list-wrapper', state.doneList);
+  renderOption('.done-list-wrapper', store.getState().doneList);
   loader.stop();
   return;
 };

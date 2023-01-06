@@ -1,5 +1,5 @@
 import { renderList, renderOption } from '../features';
-import { Loaders, state } from '../utils';
+import { Loaders, state, store } from '../utils';
 
 export default async () => {
   const mainEl = document.querySelector('main');
@@ -19,7 +19,7 @@ export default async () => {
   await renderList();
 
   // Option 기능
-  renderOption('.list-wrap', state.list);
+  renderOption('.list-wrap', store.getState().list);
   loader.stop();
   return;
 };

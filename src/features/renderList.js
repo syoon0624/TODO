@@ -1,5 +1,5 @@
 import { todoList, trashList } from '../components';
-import { state } from '../utils';
+import { initState, state, store } from '../utils';
 import { swapList } from './swapList';
 import { todoListTool } from './todoListTool';
 
@@ -20,16 +20,16 @@ const renderList = async () => {
   const { pathname } = location;
   switch (pathname) {
     case '/done':
-      todoList('.done-list-wrapper', state.doneList);
+      todoList('.done-list-wrapper', store.getState().doneList);
       break;
     case '/notdone':
-      todoList('.not-done-list-wrapper', state.notDoneList);
+      todoList('.not-done-list-wrapper', store.getState().notDoneList);
       break;
     case '/trash':
-      trashList('.list-wrap', state.trashList);
+      trashList('.list-wrap', store.getState().trashList);
       break;
     default:
-      todoList('.list-wrap', state.list);
+      todoList('.list-wrap', store.getState().list);
       break;
   }
 

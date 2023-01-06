@@ -1,5 +1,5 @@
 import { formatDate } from '../features';
-import { state } from './store';
+import { store } from './store';
 
 const key = process.env.API_KEY;
 const headers = {
@@ -36,8 +36,8 @@ const createTodo = async (title, order = 0) => {
     });
     const json = await res.json();
     json.updatedAt = formatDate(json.updatedAt);
-    state.list.push(json);
-    state.notDoneList.push(json);
+    const a = store.getState().list.push(json);
+    const b = store.getState().notDoneList.push(json);
     return json;
   } catch (err) {
     console.log(err);
