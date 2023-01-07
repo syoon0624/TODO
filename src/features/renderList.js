@@ -1,5 +1,5 @@
 import { todoList, trashList } from '../components';
-import { initState, state, store } from '../utils';
+import { store } from '../utils';
 import { swapList } from './swapList';
 import { todoListTool } from './todoListTool';
 

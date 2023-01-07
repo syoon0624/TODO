@@ -45,8 +45,7 @@ const swapList = (ul, list) => {
           // state값 갱신
           setStateDo(ele.id, formatDate(), true);
           // 날짜 갱신
-          titleWrapEl.querySelector('.date > p > span').textContent =
-            formatDate();
+          titleWrapEl.querySelector('.date > p > span').textContent = formatDate();
 
           // 실제 서버상의 값 갱신
           editTodo(ele.id, title, true);
@@ -65,8 +64,7 @@ const swapList = (ul, list) => {
           // state값 갱신
           setStateDo(ele.id, formatDate(), false);
           // 날짜 갱신
-          titleWrapEl.querySelector('.date > p > span').textContent =
-            formatDate();
+          titleWrapEl.querySelector('.date > p > span').textContent = formatDate();
           // 실제 서버상의 값 갱신
           editTodo(ele.id, title, false);
         }

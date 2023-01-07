@@ -29,13 +29,11 @@ const header = async () => {
   anchorEls.forEach((anchorEl) => {
     const href = anchorEl.id;
     const aEl = anchorEl.querySelector('a');
-    pathname === href
-      ? (aEl.style.color = 'orange')
-      : (aEl.style.color = 'black');
+    pathname === href ? (aEl.style.color = 'orange') : (aEl.style.color = 'black');
   });
 
   // todo Post
-  await formEl.addEventListener('submit', async (e) => {
+  formEl.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const loader = new Loaders({
@@ -44,8 +42,10 @@ const header = async () => {
     loader.start();
 
     const data = inputEl.value;
-    await createTodo(data);
-    inputEl.value = '';
+    if (data !== '') {
+      await createTodo(data);
+      inputEl.value = '';
+    }
 
     renderList();
     loader.stop();

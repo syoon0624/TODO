@@ -1,5 +1,5 @@
 import { option, todoList } from '../components';
-import { deleteTodo, Loaders, store, deleteState } from '../utils';
+import { deleteTodo, Loaders, store, deleteState, actionCreator } from '../utils';
 import { swapSetting } from './renderList';
 
 let optionToggle = true;
@@ -78,7 +78,7 @@ const renderOption = (className, list) => {
           // 비동기 처리(순차 처리)를 위해 forEach 대신 for of 사용
           for (let ele of trashEls) {
             await deleteTodo(ele.id);
-            deleteState(ele.id);
+            store.dispatch(actionCreator('DELETE_LIST', deleteState(ele.id)));
             ele.remove();
           }
           loader.stop();

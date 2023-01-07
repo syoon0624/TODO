@@ -40,11 +40,27 @@ const initState = {
 export const INIT = 'INIT';
 
 export const store = createStore((state = initState, action = {}) => {
-  console.log('state: ', state);
-  console.log('action: ', action.payload);
+  // console.log('state: ', state);
+  // console.log('action: ', action.payload);
   switch (action.type) {
     case 'INIT':
       return { ...action.payload };
+    case 'SET_LIST':
+      return { ...state, list: action.payload };
+    case 'SET_DONE_LIST':
+      return { ...state, doneList: action.payload };
+    case 'SET_NOT_DONE_LIST':
+      return { ...state, notDoneList: action.payload };
+    case 'SET_TRASH_LIST':
+      return { ...state, trashList: action.payload };
+    case 'ADD_LIST':
+      state.list.push(action.payload);
+      state.notDoneList.push(action.payload);
+      return { ...state };
+    case 'SET_TITLE':
+      return { ...state, list: { ...state.list, title: action.payload } };
+    case 'DELETE_LIST':
+      return { ...state, trashList: action.payload };
     default:
       return state;
   }
@@ -64,28 +80,49 @@ const initialState = async () => {
   });
 
   const list = newState.filter((item) => item.order !== 99);
-  const doneList = newState.filter((item) => item.done === true);
-  const notDoneList = newState.filter((item) => item.done === false);
+  const doneList = newState.filter((item) => item.done === true && item.order !== 99);
+  const notDoneList = newState.filter((item) => item.done === false && item.order !== 99);
   const trashList = newState.filter((item) => item.order === 99);
   return { list, doneList, notDoneList, trashList };
 };
 
+// 해당 리스트의 인덱스 찾기
+const findListIndex = (list, id) => {
+  return list.findIndex((item) => item.id === id);
+};
+
+// 데이터 추가
 const setStateList = (obj) => {
   const key = obj.done ? 'doneList' : 'notDoneList';
+  const actionKey = obj.done ? 'SET_DONE_LIST' : 'SET_NOT_DONE_LIST';
   const deleteKey = obj.done ? 'notDoneList' : 'doneList';
+  const actionDeleteKey = obj.done ? 'SET_NOT_DONE_LIST' : 'SET_DONE_LIST';
   const data = store.getState();
-
+  console.log(data);
   if (obj.order === 99) {
     // 휴지통으로
-    data.trashList = [...data.trashList, obj];
-    data.list = data.list.filter((item) => item.id !== obj.id);
-    data[key] = data[key].filter((item) => item.id !== obj.id);
+    store.dispatch(actionCreator('SET_TRASH_LIST', [...data.trashList, obj]));
+    store.dispatch(
+      actionCreator(
+        'SET_LIST',
+        data.list.filter((item) => item.id !== obj.id)
+      )
+    );
+    store.dispatch(
+      actionCreator(
+        actionKey,
+        data[key].filter((item) => item.id !== obj.id)
+      )
+    );
   } else {
-    data[key] = [...data[key], obj];
-    data[deleteKey] = data[deleteKey].filter((item) => item.id !== obj.id);
+    store.dispatch(actionCreator(actionKey, [...data[key], obj]));
+    store.dispatch(
+      actionCreator(
+        actionDeleteKey,
+        data[deleteKey].filter((item) => item.id !== obj.id)
+      )
+    );
   }
-
-  return data;
 };
 
 // 할일 문장
@@ -94,7 +131,6 @@ const setStateTitle = (id, value, date) => {
   const obj = data.list.filter((item) => item.id === id)[0];
   obj.title = value;
   obj.updatedAt = date;
-  return obj;
 };
 
 // 완료/미완료로 바뀜 시 리스트 set
@@ -118,9 +154,7 @@ const setStateTrash = (id) => {
 // 완전 삭제
 const deleteState = (id) => {
   const data = store.getState();
-  data.trashList.splice(findListIndex(data.trashList, id), 1);
-
-  return data;
+  store.dispatch(actionCreator('DELETE_LIST', data.trashList.splice(findListIndex(data.trashList, id), 1)));
 };
 
 // 복원하기
@@ -131,7 +165,6 @@ const restoreState = (id) => {
   data.list = [...data.list, obj];
 
   setStateList(obj);
-  return data;
 };
 
 export { setStateDo, setStateTitle, setStateTrash, restoreState, deleteState, initialState };

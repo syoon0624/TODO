@@ -1,20 +1,10 @@
-import {
-  editTodo,
-  deleteTodo,
-  deleteState,
-  restoreState,
-  setStateDo,
-  setStateTitle,
-  setStateTrash,
-} from '../utils';
+import { editTodo, deleteTodo, deleteState, restoreState, setStateDo, setStateTitle, setStateTrash } from '../utils';
 import { formatDate } from './formatDate';
 
 // 완료하기-미완료하기 토글 버튼 핸들링
 const doneButtonHandle = (event) => {
   const doneListWrapperEl = document.querySelector('.done-list-wrapper > ul');
-  const notDoneListWrapperEl = document.querySelector(
-    '.not-done-list-wrapper > ul'
-  );
+  const notDoneListWrapperEl = document.querySelector('.not-done-list-wrapper > ul');
   const targetEl = event.target;
   const liWrap = targetEl.closest('.todo-li');
   const titleWrap = liWrap.querySelector('.title-wrap');
@@ -25,8 +15,7 @@ const doneButtonHandle = (event) => {
   if (!isDone) {
     // 미완료 -> 완료
     // 영역간 이동
-    if (doneListWrapperEl !== null)
-      doneListWrapperEl.insertBefore(liWrap, doneListWrapperEl.firstChild);
+    if (doneListWrapperEl !== null) doneListWrapperEl.insertBefore(liWrap, doneListWrapperEl.firstChild);
     else if (notDoneListWrapperEl !== null) liWrap.remove();
 
     targetEl.classList.add('done');
@@ -34,11 +23,7 @@ const doneButtonHandle = (event) => {
   } else {
     // 완료 -> 미완료
     // 영역간 이동
-    if (notDoneListWrapperEl !== null)
-      notDoneListWrapperEl.insertBefore(
-        liWrap,
-        notDoneListWrapperEl.firstChild
-      );
+    if (notDoneListWrapperEl !== null) notDoneListWrapperEl.insertBefore(liWrap, notDoneListWrapperEl.firstChild);
     else if (doneListWrapperEl !== null) {
       liWrap.remove();
     }
