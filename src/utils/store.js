@@ -54,8 +54,8 @@ export const store = createStore((state = initState, action = {}) => {
     case 'SET_TRASH_LIST':
       return { ...state, trashList: action.payload };
     case 'ADD_LIST':
-      state.list.push(action.payload);
-      state.notDoneList.push(action.payload);
+      state.list.unshift(action.payload);
+      state.notDoneList.unshift(action.payload);
       return { ...state };
     case 'SET_TITLE':
       return { ...state, list: { ...state.list, title: action.payload } };
